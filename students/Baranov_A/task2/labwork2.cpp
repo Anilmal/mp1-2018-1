@@ -4,7 +4,6 @@
 #include <cstdlib>
 using namespace std;
 
-
 class Matrix
 {
 private:
@@ -30,24 +29,16 @@ public:
 			}
 		}
 	}
-	//Деструктор
-	~Matrix()
+	//Конструкотр по параметрам
+	Matrix(int _hight, int _weight)
 	{
-		delete[] Massive;
-	}
-	//Иницыализация элементов матрицы
-	void SetMatrix()
-	{
-		cout << "Введите количество строк" << endl;
-		cin >> hight;
-		cout << "Введите количество столбцов" << endl;
-		cin >> weight;
-		cout << "Введите элементы матирцы" << endl;
+		hight = _hight;
+		weight = _weight;
 		Massive = new int*[hight];
 		for (int j = 0;j < hight;j++)
 		{
 			Massive[j] = new int[weight];
-		};
+		}
 		for (int h = 0;h < hight;h++)
 		{
 			for (int w = 0;w < weight;w++)
@@ -55,32 +46,61 @@ public:
 				Massive[h][w] = 0;
 			}
 		}
+	}
+	//Деструктор
+	~Matrix()
+	{
+		for (int j = 0;j < hight;j++)
+		{
+			delete[] Massive[j];
+		}
+		delete[] Massive;
+	}
+	//Иницыализация элементов матрицы
+	void SetMatrix(int _hight, int _weight, int **Massive_)
+	{
+		hight = _hight;
+		weight = _weight;
+		Massive = new int*[hight];
+		for (int j = 0;j < hight;j++)
+		{
+			Massive[j] = new int[weight];
+		}
 		for (int h = 0;h < hight;h++)
 		{
 			for (int w = 0;w < weight;w++)
 			{
-				cin >> Massive[h][w];
+				Massive[h][w] = Massive_[h][w];
 			}
 		}
-
 	}
 	//Оператор присваивания
-	const Matrix & operator = (const Matrix &obj)
+	Matrix & operator = (const Matrix &obj)
 	{
 		if (&obj != this)
 		{
-			for (int i = 0;i < hight;i++)
+			for (int j = 0;j < hight;j++)
 			{
-				for (int j = 0;j < weight;j++)
-				{
-					Massive[i][j] = obj.Massive[i][j];
-				}
+				delete[] Massive[j];
+			}
+			delete[] Massive;
+			Massive = new int*[hight];
+			for (int j = 0;j < hight;j++)
+			{
+				Massive[j] = new int[weight];
+			}
+		}
+		for (int h = 0;h < hight;h++)
+		{
+			for (int w = 0;w < weight;w++)
+			{
+				Massive[h][w] = obj.Massive[h][w];
 			}
 		}
 		return *this;
 	}
 	//Оператор сложения матриц 
-	Matrix & operator + (const Matrix &M)
+	Matrix operator += (const Matrix &M)
 	{
 		if (hight == M.hight && weight == M.weight)
 			for (int h = 0;h < hight;h++)
@@ -90,12 +110,21 @@ public:
 					Massive[h][w] = Massive[h][w] + M.Massive[h][w];
 				}
 			}
-		if (hight != M.hight || weight != M.weight)
-		{
-			cout << "Операция невозможна!";
-			exit(1);
-		}
 		return *this;
+	}
+	Matrix operator + (const Matrix &M)
+	{
+		Matrix tmp(hight, weight);//определение новой пустой матрицы чиобы записать в нее сумму
+		if (hight == M.hight && weight == M.weight)
+			for (int h = 0;h < hight;h++)
+			{
+				for (int w = 0;w < weight;w++)
+				{
+					Massive[h][w] += M.Massive[h][w];
+					tmp.Massive[h][w] = Massive[h][w];
+				}
+			}
+		return tmp;
 	}
 	//Вывод на экран матрицы
 	void ShowMatrix()
@@ -111,10 +140,8 @@ public:
 		}
 	}
 	//Вывод элемента матрицы по заданному индексу
-	void ShowNum()
+	void ShowNum(int hig, int wei)
 	{
-		int hig;
-		int wei;
 		cout << "Введите номер столбца: ";
 		cin >> wei;
 		cout << "Введите номер строки: ";
@@ -122,22 +149,16 @@ public:
 		cout << Massive[hig - 1][wei - 1] << endl;;
 	}
 	//Установка элемента матрицы по индексу
-	void SetNum()
+	int SetNum(int h, int w)
 	{
-		int h;
-		int w;
-		cout << "Введите номер столбца: ";
-		cin >> w;
-		cout << "Введите номер строки: ";
-		cin >> h;
 		cout << "Введите значение элемента: ";
 		cin >> Massive[h - 1][w - 1];
+		return Massive[h - 1][w - 1];
 	}
 	//Проверка на диагональное преобладание
-	void Diagonal()
+	bool Diagonal()
 	{
 		int sum = 0;
-		bool diag = true;
 		for (int h = 0;h < hight;h++)
 		{
 			for (int w = 0;w < weight;w++)
@@ -150,19 +171,19 @@ public:
 			for (int i = 0;i < hight; i++)
 			{
 				if (abs(Massive[i][i]) < sum)
-					diag = false;
+					return 0;
 			}
-			if (diag == false)
-				cout << "В матрице нет диагонального приобладания" << endl;
-			if (diag == true)
-				cout << "В матрице нет диагонального приобладания" << endl;
 		}
+		return 1;
 	}
 };
 int main()
 {
 	int choice, operation;
+	int hight;
+	int weight;
 	Matrix M;
+	int **Massive;
 	system("chcp 1251>nul");
 in:	cout << "Желаете задать матрицу?" << endl;
 	cout << "1-Да,2-Нет" << endl;
@@ -172,7 +193,24 @@ in:	cout << "Желаете задать матрицу?" << endl;
 		goto in;
 	if (choice == 1)
 	{
-		M.SetMatrix();
+		cout << "Введите количество строк" << endl;
+		cin >> hight;
+		cout << "Введите количество столбцов" << endl;
+		cin >> weight;
+		cout << "Введите элементы матирцы" << endl;
+		Massive = new int*[hight];
+		for (int j = 0;j < hight;j++)
+		{
+			Massive[j] = new int[weight];
+		};
+		for (int h = 0;h < hight;h++)
+		{
+			for (int w = 0;w < weight;w++)
+			{
+				cin >> Massive[h][w];
+			}
+		}
+		M.SetMatrix(hight, weight, Massive);
 		system("cls");
 		M.ShowMatrix();
 		system("pause");
@@ -182,27 +220,54 @@ in:	cout << "Желаете задать матрицу?" << endl;
 		cin >> operation;
 		if (operation == 1)
 		{
-			M.SetNum();
+			cout << "Введите номер столбца: ";
+			cin >> weight;
+			cout << "Введите номер строки: ";
+			cin >> hight;
+			M.SetNum(hight, weight);
 			M.ShowMatrix();
 			system("pause");
 		}
 		if (operation == 2)
 		{
-			M.ShowNum();
+			cout << "Введите номер столбца: ";
+			cin >> weight;
+			cout << "Введите номер строки: ";
+			cin >> hight;
+			M.ShowNum(hight, weight);
 			system("pause");
 		}
 		if (operation == 3)
 		{
 			Matrix M2;
-			M2.SetMatrix();
+			Matrix M3;
+			cout << "Введите количество строк" << endl;
+			cin >> hight;
+			cout << "Введите количество столбцов" << endl;
+			cin >> weight;
+			cout << "Введите элементы матирцы" << endl;
+			Massive = new int*[hight];
+			for (int j = 0;j < hight;j++)
+			{
+				Massive[j] = new int[weight];
+			};
+			for (int h = 0;h < hight;h++)
+			{
+				for (int w = 0;w < weight;w++)
+				{
+					cin >> Massive[h][w];
+				}
+			}
+			M2.SetMatrix(hight, weight, Massive);
 			system("cls");
-			M = M + M2;
-			M.ShowMatrix();
+			M3 = M + M2;
+			M3.ShowMatrix();
 			system("pause");
 		}
 		if (operation == 4)
 		{
 			M.Diagonal();
+			cout << M.Diagonal() << " " << endl;
 			system("pause");
 		}
 		if (operation == 5)
