@@ -4,15 +4,15 @@
 #include <string>
 using namespace std;
 
-class Console
+class Textredactor
 {
 private:
 	int x;
 	int y;
-	int lenght;
-	string K;
+	int length;
+	string txt;
 public:
-	Console()//конструктор координат
+	Textredactor()//конструктор координат
 	{
 		x = 0;
 		y = 0;
@@ -22,11 +22,11 @@ public:
 		}
 		for (int i = 0; i < x; i++)
 		{
-			cout << ' ';
+			cout << "   ";
 		}
 
 	}
-	void Setconsole(int _x, int _y)//установка координат
+	void Setcoordinat(int _x, int _y)//установка координат
 	{
 		x = _x;
 		y = _y;
@@ -36,45 +36,58 @@ public:
 		}
 		for (int i = 0; i < x; i++)
 		{
-			cout << ' ';
+			cout << "   ";
 		}
 
 	}
-	void Setstring(string _k, int len)//установка строки
+	int Setlength(int leng)
 	{
-		lenght = len;
-		K = _k;
-
+		length = leng;
+		return length;
 	}
-	void Show(string _k, int L)//Вывод строки
+	char* Getstring()//установка строки
 	{
-		if (lenght<L)//при несовпадении длин выводит определенное количество символов
-		{
-			char *Mass;
-			Mass = new char[lenght];
-			strcpy(Mass, _k.c_str());
-			for (int j = 0;j < lenght;j++)
+		basic_string <char>::size_type len;
+		len = txt.length();//длина записанной строки
+		char *Mass;
+		Mass = new char[len];
+		strcpy(Mass, txt.c_str());
+		if (length<len)//при несовпадении длин выводит определенное количество символов
 
+		{
+			for (int j = 0;j < len;j++)
 			{
-				cout << Mass[j];
+				if (j > length - 1)
+					Mass[j] = 0;
 			}
-			cout << endl;
+			return Mass;
 		}
-		if (lenght == L)
-			cout << K << endl;
-		if (lenght > L)
+
+		if (length == len)
 		{
-			cout << K << endl;
+			return Mass;
 		}
+
+		if (length > len)
+		{
+			return Mass;
+		}
+		return Mass;
 	}
+	friend istream& operator >> (istream&, Textredactor&);
 };
+istream& operator >> (istream& ist, Textredactor& Text)
+{
+	ist >> Text.txt;
+	return ist;
+}
 int main()
 {
 	int choice;
 	int X = 0;
 	int Y = 0;
-	int lenght = 0;
-	Console M;
+	int length = 0;
+	Textredactor str;
 	setlocale(LC_ALL, "Russian");
 in:	cout << "Желаете задать координаты?" << endl;
 	cout << "1-Да,2-Нет" << endl;
@@ -85,19 +98,16 @@ in:	cout << "Желаете задать координаты?" << endl;
 	if (choice == 1)
 	{
 		cout << "Введите длину строки" << endl;
-		cin >> lenght;
-		std::string str(lenght, 0);//задание нулевой строки
+		cin >> length;
 		cout << "Введите координаты" << endl;
 		cin >> X;
 		cin >> Y;
 		cout << "Введите строку" << endl;
 		cin >> str;
 		system("cls");
-		basic_string <char>::size_type len;
-		len = str.length();//длина записанной строки
-		M.Setstring(str, lenght);
-		M.Setconsole(X, Y);
-		M.Show(str, len);
+		str.Setlength(length);
+		str.Setcoordinat(X, Y);
+		cout << str.Getstring() << endl;
 		system("pause");
 	}
 }
