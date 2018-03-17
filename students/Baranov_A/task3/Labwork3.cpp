@@ -2,6 +2,7 @@
 #include <iostream>
 #include <cstdlib>
 #include <string>
+#include <conio.h>
 using namespace std;
 
 class Textredactor
@@ -10,7 +11,6 @@ private:
 	int x;
 	int y;
 	int length;
-	string txt;
 public:
 	Textredactor()//конструктор координат
 	{
@@ -40,47 +40,38 @@ public:
 		}
 
 	}
+	//Методы узнать координаты
+	int GetcoordX()
+	{
+		return x;
+	}
+	int GetcoordY()
+	{
+		return y;
+	}
+	//Установка длины
 	int Setlength(int leng)
 	{
 		length = leng;
 		return length;
 	}
-	char* Getstring()//установка строки
+	//Узнать длину
+	int Getlength()
 	{
-		basic_string <char>::size_type len;
-		len = txt.length();//длина записанной строки
-		char *Mass;
-		Mass = new char[len];
-		strcpy(Mass, txt.c_str());
-		if (length<len)//при несовпадении длин выводит определенное количество символов
-
-		{
-			for (int j = 0;j < len;j++)
-			{
-				if (j > length - 1)
-					Mass[j] = 0;
-			}
-			return Mass;
-		}
-
-		if (length == len)
-		{
-			return Mass;
-		}
-
-		if (length > len)
-		{
-			return Mass;
-		}
-		return Mass;
+		return length;
 	}
-	friend istream& operator >> (istream&, Textredactor&);
+	//Ввод текста
+	void Vvod()
+	{
+		char *tx;
+		tx = new char[length];
+		for (int i = 0;i < length;i++)
+		{
+			tx[i] = _getch();
+			putchar(tx[i]);
+		}
+	}
 };
-istream& operator >> (istream& ist, Textredactor& Text)
-{
-	ist >> Text.txt;
-	return ist;
-}
 int main()
 {
 	int choice;
@@ -102,12 +93,13 @@ in:	cout << "Желаете задать координаты?" << endl;
 		cout << "Введите координаты" << endl;
 		cin >> X;
 		cin >> Y;
-		cout << "Введите строку" << endl;
-		cin >> str;
 		system("cls");
+		cout << "Введите строку" << endl;
 		str.Setlength(length);
 		str.Setcoordinat(X, Y);
-		cout << str.Getstring() << endl;
+		str.Vvod();
+		cout << endl;
 		system("pause");
+
 	}
 }
