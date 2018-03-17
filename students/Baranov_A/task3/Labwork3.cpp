@@ -13,10 +13,23 @@ private:
 	int length;
 	char* text;
 public:
-	Textredactor()//конструктор координат
+	//конструктор по умолчанию
+	Textredactor()
 	{
 		x = 0;
 		y = 0;
+		length = 0;
+		text = new char[length + 1];
+		for (int i = 0;i <length + 1;i++)
+		{
+			text[i] = 0;
+		}
+	}
+	//конструктор с параметрами
+	Textredactor(int X, int Y)
+	{
+		x = X;
+		y = Y;
 		length = 0;
 		text = new char[length + 1];
 		for (int i = 0;i <length + 1;i++)
@@ -36,6 +49,7 @@ public:
 			text[j] = obj.text[j];
 		}
 	}
+	//Деструктор
 	~Textredactor()
 	{
 		delete[] text;
@@ -46,14 +60,15 @@ public:
 		if (&obj != this)
 		{
 			delete[] text;
-			text = new char[length];
+			text = new char[length + 1];
 		}
-		for (int i = 0;i < length;i++)
+		for (int i = 0;i < length + 1;i++)
 		{
 			text[i] = obj.text[i];
 		}
 		return *this;
 	}
+	//Установка координат
 	void Setcoordinat(int _x, int _y)//установка координат
 	{
 		x = _x;
@@ -68,6 +83,7 @@ public:
 		}
 
 	}
+	//Методы получения координат
 	int GetcoordX()
 	{
 		return x;
@@ -76,24 +92,33 @@ public:
 	{
 		return y;
 	}
+	//Установка длины
 	void Setlength(int leng)
 	{
 		length = leng;
 	}
+	//Получение длины
+	int Getlength()
+	{
+		return length;
+	}
+	//Ввод строки
 	char* Vvod()
 	{
 
 		for (int i = 0;i < length;i++)
 		{
 			text[i] = _getch();
-			cout << text[i];
+			putchar(text[i]);
 		}
 		return text;
 	}
+	//Получение строки
 	char* Getline()
 	{
 		return text;
 	}
+	//Вывод строки
 	friend ostream& operator<<(ostream&, Textredactor&);
 };
 ostream& operator<<(ostream& os, Textredactor& obj)
@@ -109,26 +134,34 @@ int main()
 	int length = 0;
 	Textredactor str;
 	setlocale(LC_ALL, "Russian");
-in:	cout << "Желаете задать координаты?" << endl;
-	cout << "1-Да,2-Нет" << endl;
+in:	cout << "\t Желаете ввести строку?\n"
+	<< "\t 1-да или 2-нет\n\t";
 	cin >> choice;
 	system("cls");
-	if (choice != 1)
-		goto in;
+	if (choice == 2)
+		exit(0);
 	if (choice == 1)
 	{
-		cout << "Введите длину строки" << endl;
+		cout << "\t Введите длину строки :\t";
 		cin >> length;
-		cout << "Введите координаты" << endl;
+		str.Setlength(length);
+		cout << "\t Введите координаты X:\t";
 		cin >> X;
+		cout << "\t Введите координаты Y:\t";
 		cin >> Y;
 		system("cls");
-		str.Setlength(length);
-		cout << "Введите строку" << endl;
 		str.Setcoordinat(X, Y);
+		cout << "Введите строку:\t";
 		str.Vvod();
-		cout << endl;
+		cout << "\n";
 		system("pause");
-		exit(0);
+		system("cls");
+		cout << "\t Желаете продолжить?\n"
+			<< "\t 1-да,2-нет\n\t";
+		cin >> choice;
+		if (choice == 2)
+			exit(0);
+		if (choice == 1)
+			goto in;
 	}
 }
