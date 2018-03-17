@@ -18,8 +18,8 @@ public:
 		x = 0;
 		y = 0;
 		length = 0;
-		text = new char[length];
-		for (int i = 0;i < length;i++)
+		text = new char[length + 1];
+		for (int i = 0;i <length + 1;i++)
 		{
 			text[i] = 0;
 		}
@@ -50,10 +50,9 @@ public:
 	{
 		return y;
 	}
-	int Setlength(int leng)
+	void Setlength(int leng)
 	{
 		length = leng;
-		return length;
 	}
 	void Vvod()
 	{
@@ -63,11 +62,15 @@ public:
 			text[i] = _getch();
 		}
 	}
+	char* Getline()
+	{
+		return text;
+	}
 	void Show()
 	{
-		for (int i = 0;i < length;i++)
+		for (int i = 0;i <length;i++)
 		{
-			putchar(text[i]);
+			cout << text[i];
 		}
 	}
 };
@@ -95,8 +98,9 @@ in:	cout << "Желаете задать координаты?" << endl;
 		system("cls");
 		cout << "Введите строку" << endl;
 		str.Setlength(length);
-		str.Setcoordinat(X, Y);
 		str.Vvod();
+		system("cls");
+		str.Setcoordinat(X, Y);
 		str.Show();
 		cout << endl;
 		system("pause");
