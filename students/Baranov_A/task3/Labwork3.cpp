@@ -11,20 +11,22 @@ private:
 	int x;
 	int y;
 	int length;
+	char* text;
 public:
 	Textredactor()//конструктор координат
 	{
 		x = 0;
 		y = 0;
-		for (int j = 0; j < y; j++)
+		length = 0;
+		text = new char[length];
+		for (int i = 0;i < length;i++)
 		{
-			cout << endl;
+			text[i] = 0;
 		}
-		for (int i = 0; i < x; i++)
-		{
-			cout << "   ";
-		}
-
+	}
+	~Textredactor()
+	{
+		delete[] text;
 	}
 	void Setcoordinat(int _x, int _y)//установка координат
 	{
@@ -40,7 +42,6 @@ public:
 		}
 
 	}
-	//Методы узнать координаты
 	int GetcoordX()
 	{
 		return x;
@@ -49,26 +50,24 @@ public:
 	{
 		return y;
 	}
-	//Установка длины
 	int Setlength(int leng)
 	{
 		length = leng;
 		return length;
 	}
-	//Узнать длину
-	int Getlength()
-	{
-		return length;
-	}
-	//Ввод текста
 	void Vvod()
 	{
-		char *tx;
-		tx = new char[length];
+
 		for (int i = 0;i < length;i++)
 		{
-			tx[i] = _getch();
-			putchar(tx[i]);
+			text[i] = _getch();
+		}
+	}
+	void Show()
+	{
+		for (int i = 0;i < length;i++)
+		{
+			putchar(text[i]);
 		}
 	}
 };
@@ -98,8 +97,9 @@ in:	cout << "Желаете задать координаты?" << endl;
 		str.Setlength(length);
 		str.Setcoordinat(X, Y);
 		str.Vvod();
+		str.Show();
 		cout << endl;
 		system("pause");
-
+		exit(0);
 	}
 }
