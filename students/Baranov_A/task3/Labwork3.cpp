@@ -24,9 +24,35 @@ public:
 			text[i] = 0;
 		}
 	}
+	//конструктор копирования
+	Textredactor(const Textredactor& obj)
+	{
+		x = obj.x;
+		y = obj.y;
+		length = obj.length;
+		text = new char[length + 1];
+		for (int j = 0;j < length + 1;j++)
+		{
+			text[j] = obj.text[j];
+		}
+	}
 	~Textredactor()
 	{
 		delete[] text;
+	}
+	//оператор присваивания
+	Textredactor& operator=(Textredactor& obj)
+	{
+		if (&obj != this)
+		{
+			delete[] text;
+			text = new char[length];
+		}
+		for (int i = 0;i < length;i++)
+		{
+			text[i] = obj.text[i];
+		}
+		return *this;
 	}
 	void Setcoordinat(int _x, int _y)//установка координат
 	{
@@ -68,7 +94,13 @@ public:
 	{
 		return text;
 	}
+	friend ostream& operator<<(ostream&, Textredactor&);
 };
+ostream& operator<<(ostream& os, Textredactor& obj)
+{
+	os << obj.text;
+	return os;
+}
 int main()
 {
 	int choice;
