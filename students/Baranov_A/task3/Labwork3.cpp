@@ -54,24 +54,19 @@ public:
 	{
 		length = leng;
 	}
-	void Vvod()
+	char* Vvod()
 	{
 
 		for (int i = 0;i < length;i++)
 		{
 			text[i] = _getch();
+			cout << text[i];
 		}
+		return text;
 	}
 	char* Getline()
 	{
 		return text;
-	}
-	void Show()
-	{
-		for (int i = 0;i <length;i++)
-		{
-			cout << text[i];
-		}
 	}
 };
 int main()
@@ -96,12 +91,10 @@ in:	cout << "Желаете задать координаты?" << endl;
 		cin >> X;
 		cin >> Y;
 		system("cls");
-		cout << "Введите строку" << endl;
 		str.Setlength(length);
-		str.Vvod();
-		system("cls");
+		cout << "Введите строку" << endl;
 		str.Setcoordinat(X, Y);
-		str.Show();
+		str.Vvod();
 		cout << endl;
 		system("pause");
 		exit(0);
