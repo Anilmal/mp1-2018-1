@@ -1,4 +1,4 @@
-#define _CRT_SECURE_NO_WARNINGS
+ï»¿#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <cstdlib> 
 #include <locale> 
@@ -7,14 +7,14 @@
 
 using namespace std;
 
-//ñòðóêòóðà â êîòîðîé õðàíèòñÿ äàòà íàáëþäåíèÿ è åãî ðåçóëüòàò(âåñ)
+//ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ñ…Ñ€Ð°Ð½Ð¸Ñ‚ÑÑ Ð´Ð°Ñ‚Ð° Ð½Ð°Ð±Ð»ÑŽÐ´ÐµÐ½Ð¸Ñ Ð¸ ÐµÐ³Ð¾ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚(Ð²ÐµÑ)
 struct Nabl
 {
 	int date_day = 0;
 	int date_month = 0;
 	int date_year = 0;
 	int weight = 0;
-	//ôóíêöèÿ óñòàíîâêè äàòû(ñ ïðîâåðêîé íà ìåñÿö è ãîä)
+	//Ñ„ÑƒÐ½ÐºÑ†Ð¸Ñ ÑƒÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ¸ Ð´Ð°Ñ‚Ñ‹(Ñ Ð¿Ñ€Ð¾Ð²ÐµÑ€ÐºÐ¾Ð¹ Ð½Ð° Ð¼ÐµÑÑÑ† Ð¸ Ð³Ð¾Ð´)
 	void SetNabl(int dt_day, int dt_month, int dt_year, int weight_)
 	{
 		date_day = dt_day;
@@ -68,10 +68,10 @@ struct Nabl
 		}
 		if (date_month > 12)
 		{
-			cout << "Íåïðàâèëüíûé ïàðàìåòð" << endl;
+			cout << "ÐÐµÐ¿Ñ€Ð°Ð²Ð¸Ð»ÑŒÐ½Ñ‹Ð¹ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€" << endl;
 		}
 	}
-	//îïåðàòîð ïðèñâàèâàíèÿ
+	//Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¾Ñ€ Ð¿Ñ€Ð¸ÑÐ²Ð°Ð¸Ð²Ð°Ð½Ð¸Ñ
 	Nabl& operator=(const Nabl& obj)
 	{
 		date_day = obj.date_day;
@@ -80,19 +80,19 @@ struct Nabl
 		weight = obj.weight;
 		return *this;
 	}
-	//Ïåðåãðóçêà îïåðàòîðà âûâîäà
+	//ÐŸÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð° Ð²Ñ‹Ð²Ð¾Ð´Ð°
 	friend ostream& operator<<(ostream& os, Nabl& obj);
 };
 ostream& operator<<(ostream& os, Nabl& obj)
 {
-	os << "Äàòà çàìåðà:" << obj.date_day << ".";
+	os << "Ð”Ð°Ñ‚Ð° Ð·Ð°Ð¼ÐµÑ€Ð°:" << obj.date_day << ".";
 	os << obj.date_month << ".";
 	os << obj.date_year << endl;
-	os << "Ðåçóëüòàò çàìåðà:" << obj.weight << endl;
+	os << "Ð ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚ Ð·Ð°Ð¼ÐµÑ€Ð°:" << obj.weight << endl;
 	return os;
 }
 
-//ñòðóêòóðà â êîòîðîé áóäåò ñîäåðæàòüñÿ (è âíå çàïèñûâàòüñÿ) ïåðâàÿ äàòà
+//ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ð¾Ð¹ Ð±ÑƒÐ´ÐµÑ‚ ÑÐ¾Ð´ÐµÑ€Ð¶Ð°Ñ‚ÑŒÑÑ (Ð¸ Ð²Ð½Ðµ Ð·Ð°Ð¿Ð¸ÑÑ‹Ð²Ð°Ñ‚ÑŒÑÑ) Ð¿ÐµÑ€Ð²Ð°Ñ Ð´Ð°Ñ‚Ð°
 struct Date
 {
 	int date_day = 0;
@@ -158,7 +158,7 @@ struct Date
 	}
 	friend ostream& operator<<(ostream& os, Date& obj);
 };
-//ïåðåãðóçêà îïåðàòîðà âûâîäà äëÿ ñòðóêòóðû Date
+//Ð¿ÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð¾Ð¿ÐµÑ€Ð°Ñ‚Ð¾Ñ€Ð° Ð²Ñ‹Ð²Ð¾Ð´Ð° Ð´Ð»Ñ ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ñ‹ Date
 ostream& operator<<(ostream& os, Date& obj)
 {
 	os << obj.date_day << ".";
@@ -167,24 +167,24 @@ ostream& operator<<(ostream& os, Date& obj)
 	return os;
 }
 
-//Ñòðóêòóðà äëÿ çàïèñè çà êàæäûì ÷åëîâåêîì ðåçóëüòàòîâ íàáëþäåíèé
+//Ð¡Ñ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€Ð° Ð´Ð»Ñ Ð·Ð°Ð¿Ð¸ÑÐ¸ Ð·Ð° ÐºÐ°Ð¶Ð´Ñ‹Ð¼ Ñ‡ÐµÐ»Ð¾Ð²ÐµÐºÐ¾Ð¼ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð² Ð½Ð°Ð±Ð»ÑŽÐ´ÐµÐ½Ð¸Ð¹
 struct Person
 {
 	string Name;
 	Nabl* zamer;
-	//Äåñòðóêòîð äëÿ ìàññèâà ñòðóêòóð
+	//Ð”ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð´Ð»Ñ Ð¼Ð°ÑÑÐ¸Ð²Ð° ÑÑ‚Ñ€ÑƒÐºÑ‚ÑƒÑ€
 	~Person()
 	{
 		delete[] zamer;
 	}
-	//Óçíàòü ðàçìåð ìàññèâà
+	//Ð£Ð·Ð½Ð°Ñ‚ÑŒ Ñ€Ð°Ð·Ð¼ÐµÑ€ Ð¼Ð°ÑÑÐ¸Ð²Ð°
 	size_t size()
 	{
 		return sizeof(zamer);
 	}
 	friend ostream& operator<<(ostream& os, Person& obj);
 };
-//ïåðåãðóçêà âûâîäà
+//Ð¿ÐµÑ€ÐµÐ³Ñ€ÑƒÐ·ÐºÐ° Ð²Ñ‹Ð²Ð¾Ð´Ð°
 ostream& operator<<(ostream& os, Person& obj)
 {
 	os << "/t" << obj.Name << endl;
@@ -195,7 +195,7 @@ ostream& operator<<(ostream& os, Person& obj)
 	return os;
 }
 
-//Êëàññ Íàïîëüíûå âåñû
+//ÐšÐ»Ð°ÑÑ ÐÐ°Ð¿Ð¾Ð»ÑŒÐ½Ñ‹Ðµ Ð²ÐµÑÑ‹
 class Floorweight
 {
 private:
@@ -205,15 +205,15 @@ private:
 	int min;
 	int max;
 public:
-	//Êîíñòðóêòîð
+	//ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€
 	Floorweight()
 	{
 		people = 0;
 		count = 0;
-		Family = new Person[people];//Ðàçìåð ñòðîêè-êîë-âî ÷ëåíîâ ñåìüè
+		Family = new Person[people];//Ð Ð°Ð·Ð¼ÐµÑ€ ÑÑ‚Ñ€Ð¾ÐºÐ¸-ÐºÐ¾Ð»-Ð²Ð¾ Ñ‡Ð»ÐµÐ½Ð¾Ð² ÑÐµÐ¼ÑŒÐ¸
 		for (int i = 0;i < people;i++)
 		{
-			Family[i].zamer = new Nabl[count];//×èñëî çàìåðîâ
+			Family[i].zamer = new Nabl[count];//Ð§Ð¸ÑÐ»Ð¾ Ð·Ð°Ð¼ÐµÑ€Ð¾Ð²
 			for (int j = 0;j < count;j++)
 			{
 				Family[i].zamer[j] = { 0,0,0,0 };
@@ -221,7 +221,7 @@ public:
 		}
 
 	}
-	//Êîíñòðóêòîð ïî ïàðàìåòðàì
+	//ÐšÐ¾Ð½ÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€ Ð¿Ð¾ Ð¿Ð°Ñ€Ð°Ð¼ÐµÑ‚Ñ€Ð°Ð¼
 	Floorweight(int _peop, int _tim)
 	{
 		people = _peop;
@@ -237,12 +237,12 @@ public:
 			}
 		}
 	};
-	//Äåñòðóêòîð
+	//Ð”ÐµÑÑ‚Ñ€ÑƒÐºÑ‚Ð¾Ñ€
 	~Floorweight()
 	{
 		delete[] Family;
 	}
-	//Óñòàíîâêà äàòû äëÿ âñåãî ÷èñëà íàáëþäåíèé
+	//Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð´Ð°Ñ‚Ñ‹ Ð´Ð»Ñ Ð²ÑÐµÐ³Ð¾ Ñ‡Ð¸ÑÐ»Ð° Ð½Ð°Ð±Ð»ÑŽÐ´ÐµÐ½Ð¸Ð¹
 	void Setdate(Nabl* Fam_, int _peo, int cnt_)
 	{
 		people = _peo;
@@ -262,7 +262,7 @@ public:
 			}
 		}
 	}
-	//óñòàíîâêà èìåí
+	//ÑƒÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð¸Ð¼ÐµÐ½
 	void Setname(string *Names)
 	{
 		for (int i = 0;i < people;i++)
@@ -270,14 +270,14 @@ public:
 			Family[i].Name = Names[i];
 		}
 	}
-	//Óñòàíîâêà ïåðâîé äàòû
+	//Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð¿ÐµÑ€Ð²Ð¾Ð¹ Ð´Ð°Ñ‚Ñ‹
 	void Setfirstdate(Date Fd)
 	{
 		Family[0].zamer[0].date_day = Fd.date_day;
 		Family[0].zamer[0].date_month = Fd.date_month;
 		Family[0].zamer[0].date_year = Fd.date_year;
 	}
-	//Óñòàíîâêà âåñà äëÿ âñåãî ÷èñëà íàáëþäåíèé
+	//Ð£ÑÑ‚Ð°Ð½Ð¾Ð²ÐºÐ° Ð²ÐµÑÐ° Ð´Ð»Ñ Ð²ÑÐµÐ³Ð¾ Ñ‡Ð¸ÑÐ»Ð° Ð½Ð°Ð±Ð»ÑŽÐ´ÐµÐ½Ð¸Ð¹
 	void Setweight(Nabl* Fam_)
 	{
 		for (int i = 0;i < people;i++)
@@ -288,7 +288,7 @@ public:
 			}
 		}
 	}
-	//Ïîëó÷åíèå âåñà â âûáðàííûé äåíü(íå çàâèñèò îò âûáîðà ÷ëåí ñåìüè)
+	//ÐŸÐ¾Ð»ÑƒÑ‡ÐµÐ½Ð¸Ðµ Ð²ÐµÑÐ° Ð² Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½Ñ‹Ð¹ Ð´ÐµÐ½ÑŒ(Ð½Ðµ Ð·Ð°Ð²Ð¸ÑÐ¸Ñ‚ Ð¾Ñ‚ Ð²Ñ‹Ð±Ð¾Ñ€Ð° Ñ‡Ð»ÐµÐ½ ÑÐµÐ¼ÑŒÐ¸)
 	int Getweight(int dt_day, int dt_mounth, int dt_year)
 	{
 		for (int i = 0;i < people;i++)
@@ -303,13 +303,13 @@ public:
 		}
 		return 0;
 	}
-	//Ïîëó÷èòü íà÷àëüíóþ äàòó
+	//ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð½Ð°Ñ‡Ð°Ð»ÑŒÐ½ÑƒÑŽ Ð´Ð°Ñ‚Ñƒ
 	Date Getfirstdate(Date Firstdate)
 	{
 		Firstdate.Setdate(Family[0].zamer[0].date_day, Family[0].zamer[0].date_month, Family[0].zamer[0].date_year);
 		return Firstdate;
 	}
-	//Ïîëó÷èòü ìèíèìàëüíûé âåñ èç âñåõ çàìåðîâ
+	//ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð²ÐµÑ Ð¸Ð· Ð²ÑÐµÑ… Ð·Ð°Ð¼ÐµÑ€Ð¾Ð²
 	int Minweight()
 	{
 		min = Family[0].zamer[0].weight;
@@ -323,7 +323,7 @@ public:
 		}
 		return min;
 	}
-	//Ïîëó÷èòü ìàêñèìàëüíûé âåñ èç âñåõ çàìåðîâ
+	//ÐŸÐ¾Ð»ÑƒÑ‡Ð¸Ñ‚ÑŒ Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð²ÐµÑ Ð¸Ð· Ð²ÑÐµÑ… Ð·Ð°Ð¼ÐµÑ€Ð¾Ð²
 	int Maxweight()
 	{
 		max = Family[0].zamer[0].weight;
@@ -337,12 +337,12 @@ public:
 		}
 		return max;
 	}
-	//Çàïèñü â ôàéë ðåçóëüòàòîâ
+	//Ð—Ð°Ð¿Ð¸ÑÑŒ Ð² Ñ„Ð°Ð¹Ð» Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ð¾Ð²
 	void writetofile()
 	{
 		ofstream file;
-		file.open("result.txt");//ñîçäàíèå ôàéëà
-		for (int i = 0;i < people;i++)//çàïîëíåíèå 
+		file.open("result.txt");//ÑÐ¾Ð·Ð´Ð°Ð½Ð¸Ðµ Ñ„Ð°Ð¹Ð»Ð°
+		for (int i = 0;i < people;i++)//Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ 
 		{
 			file << Family[i].Name;
 			file << endl;
@@ -353,15 +353,15 @@ public:
 				file << endl;
 			}
 		}
-		file.close();//çàâåðøåíèå
+		file.close();//Ð·Ð°Ð²ÐµÑ€ÑˆÐµÐ½Ð¸Ðµ
 	}
-	//Çàïèñü èç ôàéëà
+	//Ð—Ð°Ð¿Ð¸ÑÑŒ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð°
 	void writefromfile()
 	{
 		ifstream file("result.txt");
-		char str[100];//âðåìåííîå õðàíåíèå 
-		char tmp[100];//ñèìâîëîâ ôàéëà
-		for (int i = 0;i < people;i++)//çàïîëíåíèå èç ôàéëà 
+		char str[100];//Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ð¾Ðµ Ñ…Ñ€Ð°Ð½ÐµÐ½Ð¸Ðµ 
+		char tmp[100];//ÑÐ¸Ð¼Ð²Ð¾Ð»Ð¾Ð² Ñ„Ð°Ð¹Ð»Ð°
+		for (int i = 0;i < people;i++)//Ð·Ð°Ð¿Ð¾Ð»Ð½ÐµÐ½Ð¸Ðµ Ð¸Ð· Ñ„Ð°Ð¹Ð»Ð° 
 		{
 			file.getline(str, 12, '\n');
 			Family[i].Name = atoi(str);
@@ -378,11 +378,11 @@ public:
 			}
 		}
 	}
-	//Äîáàâèòü ÷ëåíà ñåìüè
+	//Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ‡Ð»ÐµÐ½Ð° ÑÐµÐ¼ÑŒÐ¸
 	void addfam(string Name, Nabl* Fm)
 	{
-		people += 1;//óâåëè÷èâàåì ïðàìåòð êîëëè÷åñòâà ëþäåé
-		Person *NewFamily;//ñîçäàåì âðåìåííûé ììàññèâ â êîòîðûé çàïèøå ñòàðûå äàííûå è íîâûå
+		people += 1;//ÑƒÐ²ÐµÐ»Ð¸Ñ‡Ð¸Ð²Ð°ÐµÐ¼ Ð¿Ñ€Ð°Ð¼ÐµÑ‚Ñ€ ÐºÐ¾Ð»Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð° Ð»ÑŽÐ´ÐµÐ¹
+		Person *NewFamily;//ÑÐ¾Ð·Ð´Ð°ÐµÐ¼ Ð²Ñ€ÐµÐ¼ÐµÐ½Ð½Ñ‹Ð¹ Ð¼Ð¼Ð°ÑÑÐ¸Ð² Ð² ÐºÐ¾Ñ‚Ð¾Ñ€Ñ‹Ð¹ Ð·Ð°Ð¿Ð¸ÑˆÐµ ÑÑ‚Ð°Ñ€Ñ‹Ðµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸ Ð½Ð¾Ð²Ñ‹Ðµ
 		NewFamily = new Person[people];
 		for (int i = 0;i < (people - 2);i++)
 		{
@@ -397,14 +397,14 @@ public:
 			Family[people - 1].zamer[j].date_month = Fm[j].date_month;
 			Family[people - 1].zamer[j].date_year = Fm[j].date_year;
 		}
-		delete[] Family;//î÷èùàåì ñòàðûé ìàññèâ
-		Family = new Person[people];//çàäàåì åìó íóæíûé ðàçìåð
+		delete[] Family;//Ð¾Ñ‡Ð¸Ñ‰Ð°ÐµÐ¼ ÑÑ‚Ð°Ñ€Ñ‹Ð¹ Ð¼Ð°ÑÑÐ¸Ð²
+		Family = new Person[people];//Ð·Ð°Ð´Ð°ÐµÐ¼ ÐµÐ¼Ñƒ Ð½ÑƒÐ¶Ð½Ñ‹Ð¹ Ñ€Ð°Ð·Ð¼ÐµÑ€
 		for (int i = 0;i < people;i++)
 		{
 			Family[i].zamer = new Nabl[count];
 			for (int j = 0;j < count;j++)
 			{
-				Family[i].zamer[j] = NewFamily[i].zamer[j];//çàïîëÿåì 
+				Family[i].zamer[j] = NewFamily[i].zamer[j];//Ð·Ð°Ð¿Ð¾Ð»ÑÐµÐ¼ 
 			}
 		}
 	}
@@ -424,26 +424,26 @@ int main()
 	int dt_year;
 	int weight_;
 	int choice;
-	cout << "Ââåäèòå êîëëè÷åñòâî âçâåøåííûõ ëþäåé: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð²Ð·Ð²ÐµÑˆÐµÐ½Ð½Ñ‹Ñ… Ð»ÑŽÐ´ÐµÐ¹: ";
 	cin >> people;
 	cout << endl;
-	cout << "Ââåäèòå êîëëè÷åñòâî âçâåøèâàíèé: ";
+	cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ ÐºÐ¾Ð»Ð»Ð¸Ñ‡ÐµÑÑ‚Ð²Ð¾ Ð²Ð·Ð²ÐµÑˆÐ¸Ð²Ð°Ð½Ð¸Ð¹: ";
 	cin >> count;
 	system("cls");
 	Names = new string[people];
 	k = new Nabl[count];
 	for (int i = 0;i < people;i++)
 	{
-		cout << "Ââåäèòå èìÿ: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ: ";
 		getline(cin, Names[i]);
 		cout << endl;
 		for (int j = 0;j < count;j++)
 		{
 
-			cout << "Ââåäèòå äåíü:";cin >> dt_day;cout << endl;
-			cout << "Ââåäèòå ìåñÿö:";cin >> dt_month;cout << endl;
-			cout << "Ââåäèòå ãîä:";cin >> dt_year;cout << endl;
-			cout << "Ââåäèòå âåñ:";cin >> weight_;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´ÐµÐ½ÑŒ:";cin >> dt_day;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼ÐµÑÑÑ†:";cin >> dt_month;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ð¾Ð´:";cin >> dt_year;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²ÐµÑ:";cin >> weight_;cout << endl;
 			k[i].SetNabl(dt_day, dt_month, dt_year, weight_);
 			system("cls");
 		}
@@ -451,23 +451,23 @@ int main()
 	K.Setdate(k, 1, 2);
 	K.Setname(Names);
 	K.Setweight(k);
-	cout << "×òî æåëàåòå ñäåëàòü äàëüøå?"
-		<< "1-óñòàíîâèòü íîâóþ ïåðâóþ äàòó"
-		<< "2-óçíàòü ïåðâóþ äàòó"
-		<< "3-óçíàòü ðåçóëüòàòû âçâåøèâàíèÿ â âûáðàííóþ äàòó"
-		<< "4-óçíàòü ìèíèìàëüíûé âåñ "
-		<< "5-óçíàòü ìàêñèìàëüíûé âåñ"
-		<< "6-çàïèñàòü âñå äàííûå â òåêñòîâûé ôàéë"
-		<< "7-çàïèñàòü äàííûå èç â ôàéëà â êëàññ"
-		<< "8-Äîáàâèòü ÷ëåíà ñåìüè"
-		<< "9-âûõîä";
+	cout << "Ð§Ñ‚Ð¾ Ð¶ÐµÐ»Ð°ÐµÑ‚Ðµ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ Ð´Ð°Ð»ÑŒÑˆÐµ?"
+		<< "1-ÑƒÑÑ‚Ð°Ð½Ð¾Ð²Ð¸Ñ‚ÑŒ Ð½Ð¾Ð²ÑƒÑŽ Ð¿ÐµÑ€Ð²ÑƒÑŽ Ð´Ð°Ñ‚Ñƒ"
+		<< "2-ÑƒÐ·Ð½Ð°Ñ‚ÑŒ Ð¿ÐµÑ€Ð²ÑƒÑŽ Ð´Ð°Ñ‚Ñƒ"
+		<< "3-ÑƒÐ·Ð½Ð°Ñ‚ÑŒ Ñ€ÐµÐ·ÑƒÐ»ÑŒÑ‚Ð°Ñ‚Ñ‹ Ð²Ð·Ð²ÐµÑˆÐ¸Ð²Ð°Ð½Ð¸Ñ Ð² Ð²Ñ‹Ð±Ñ€Ð°Ð½Ð½ÑƒÑŽ Ð´Ð°Ñ‚Ñƒ"
+		<< "4-ÑƒÐ·Ð½Ð°Ñ‚ÑŒ Ð¼Ð¸Ð½Ð¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð²ÐµÑ "
+		<< "5-ÑƒÐ·Ð½Ð°Ñ‚ÑŒ Ð¼Ð°ÐºÑÐ¸Ð¼Ð°Ð»ÑŒÐ½Ñ‹Ð¹ Ð²ÐµÑ"
+		<< "6-Ð·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð²ÑÐµ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð² Ñ‚ÐµÐºÑÑ‚Ð¾Ð²Ñ‹Ð¹ Ñ„Ð°Ð¹Ð»"
+		<< "7-Ð·Ð°Ð¿Ð¸ÑÐ°Ñ‚ÑŒ Ð´Ð°Ð½Ð½Ñ‹Ðµ Ð¸Ð· Ð² Ñ„Ð°Ð¹Ð»Ð° Ð² ÐºÐ»Ð°ÑÑ"
+		<< "8-Ð”Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ Ñ‡Ð»ÐµÐ½Ð° ÑÐµÐ¼ÑŒÐ¸"
+		<< "9-Ð²Ñ‹Ñ…Ð¾Ð´";
 	switch (choice)
 	{
 	case 1:
 	{
-		cout << "Ââåäèòå äåíü:";cin >> dt_day;cout << endl;
-		cout << "Ââåäèòå ìåñÿö:";cin >> dt_month;cout << endl;
-		cout << "Ââåäèòå ãîä:";cin >> dt_year;cout << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´ÐµÐ½ÑŒ:";cin >> dt_day;cout << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼ÐµÑÑÑ†:";cin >> dt_month;cout << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ð¾Ð´:";cin >> dt_year;cout << endl;
 		Fd.Setdate(dt_day, dt_month, dt_year);
 		K.Setfirstdate(Fd);
 	}
@@ -477,9 +477,9 @@ int main()
 	}
 	case 3:
 	{
-		cout << "Ââåäèòå äåíü:";cin >> dt_day;cout << endl;
-		cout << "Ââåäèòå ìåñÿö:";cin >> dt_month;cout << endl;
-		cout << "Ââåäèòå ãîä:";cin >> dt_year;cout << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´ÐµÐ½ÑŒ:";cin >> dt_day;cout << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼ÐµÑÑÑ†:";cin >> dt_month;cout << endl;
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ð¾Ð´:";cin >> dt_year;cout << endl;
 		system("cls");
 		cout << K.Getweight(dt_day, dt_month, dt_year) << endl;
 		system("pause");
@@ -506,16 +506,16 @@ int main()
 	{
 		Nabl *Fm;
 		string Name;
-		cout << "Ââåäèòå èìÿ: ";
+		cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¸Ð¼Ñ: ";
 		getline(cin, Name);
 		cout << endl;
 		Fm = new Nabl[count];
 		for (int j = 0;j < count;j++)
 		{
-			cout << "Ââåäèòå äåíü:";cin >> dt_day;cout << endl;
-			cout << "Ââåäèòå ìåñÿö:";cin >> dt_month;cout << endl;
-			cout << "Ââåäèòå ãîä:";cin >> dt_year;cout << endl;
-			cout << "Ââåäèòå âåñ:";cin >> weight_;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð´ÐµÐ½ÑŒ:";cin >> dt_day;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð¼ÐµÑÑÑ†:";cin >> dt_month;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð³Ð¾Ð´:";cin >> dt_year;cout << endl;
+			cout << "Ð’Ð²ÐµÐ´Ð¸Ñ‚Ðµ Ð²ÐµÑ:";cin >> weight_;cout << endl;
 			Fm[j].SetNabl(dt_day, dt_month, dt_year, weight_);
 		}
 		K.addfam(Name, Fm);
