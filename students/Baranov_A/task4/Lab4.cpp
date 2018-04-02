@@ -82,6 +82,7 @@ private:
 	int count;
 	int min;
 	int max;
+	Date StartDate;
 public:
 	//Конструктор
 	FloorWeight()
@@ -143,14 +144,12 @@ public:
 			Family[i].Name = Names[i];
 		}
 	}
-	//Установка первой даты (устанавливается для всех членов семьи
-	//раз она не может быть привязана к одному члену семьи)
+	//Установка первой даты (относится исключительно  к классу
 	void Setfirstdate(Date Fd)
 	{
-		for (int i = 0;i < people;i++)
-		{
-			Family[i].zamer[0].nabl = Fd;
-		}
+
+		StartDate = Fd;
+
 	}
 	//Установка веса для всего числа наблюдений
 	void SetWeight(vector <Observation> Fam_)
@@ -184,8 +183,7 @@ public:
 	//Получить начальную дату
 	Date Getfirstdate()
 	{
-
-		return Family[0].zamer[0].nabl;
+        return StartDate;
 	}
 	//Получить минимальный вес для выбранного человека
 	int Minweight(int number)
