@@ -136,6 +136,13 @@ public:
 			}
 		}
 	}
+	//Устанавливает наблюдение для выбранного человека
+	void SetNabl(Observation nabl, int number)
+	{
+				Family[number-1].Name = getchar();//задаю имя взвешенного человека
+				Family[number-1].zamer.push_back(nabl);//вношу данные взвешивания
+
+	}
 	//установка имен
 	void SetName(string *Names)
 	{
@@ -183,7 +190,8 @@ public:
 	//Получить начальную дату
 	Date Getfirstdate()
 	{
-        return StartDate;
+
+		return StartDate;
 	}
 	//Получить минимальный вес для выбранного человека
 	int Minweight(int number)
