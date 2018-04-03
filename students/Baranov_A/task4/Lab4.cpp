@@ -8,6 +8,35 @@
 
 using namespace std;
 
+struct Date
+{
+	int date_day = 0;
+	int date_month = 0;
+	int date_year = 0;
+	Date& operator=(const Date& obj)
+	{
+		date_day = obj.date_day;
+		date_month = obj.date_month;
+		date_year = obj.date_year;
+		return *this;
+	}
+	friend ostream& operator<<(ostream& os, Date& obj);
+	void Setdate(int dt_day, int dt_month, int dt_year)
+	{
+		date_day = dt_day;
+		date_month = dt_month;
+		date_year = dt_year;
+	}
+};
+//перегрузка оператора вывода для структуры Date
+ostream& operator<<(ostream& os, Date& obj)
+{
+	os << obj.date_day << ".";
+	os << obj.date_month << ".";
+	os << obj.date_year << endl;
+	return os;
+}
+
 //структура в которой хранится дата наблюдения и его результат(вес)
 struct Observation
 {
@@ -39,34 +68,6 @@ ostream& operator<<(ostream& os, Observation& obj)
 	return os;
 }
 //структура в которой будет содержаться (и вне записываться) первая дата
-struct Date
-{
-	int date_day = 0;
-	int date_month = 0;
-	int date_year = 0;
-	Date& operator=(const Date& obj)
-	{
-		date_day = obj.date_day;
-		date_month = obj.date_month;
-		date_year = obj.date_year;
-		return *this;
-	}
-	friend ostream& operator<<(ostream& os, Date& obj);
-	void Setdate(int dt_day, int dt_month, int dt_year)
-	{
-		date_day = dt_day;
-		date_month = dt_month;
-		date_year = dt_year;
-	}
-};
-//перегрузка оператора вывода для структуры Date
-ostream& operator<<(ostream& os, Date& obj)
-{
-	os << obj.date_day << ".";
-	os << obj.date_month << ".";
-	os << obj.date_year << endl;
-	return os;
-}
 
 //Структура для записи за каждым человеком результатов наблюдений
 struct Person
@@ -201,7 +202,7 @@ public:
 		{
 			if (Family[i].Name == Nam)
 			{
-				for (int j = 0;j <= Family[i].zamer.size();j++)
+				for (unsigned int j = 0;j <= Family[i].zamer.size();j++)
 				{
 					mid += Family[i].zamer[j].weight;
 					count++;
@@ -218,7 +219,7 @@ public:
 		{
 			if (Family[i].Name == Nam)
 			{
-				for (int j = 0;j <= Family[i].zamer.size();j++)
+				for (unsigned int j = 0;j <= Family[i].zamer.size();j++)
 				{
 					if (Family[i].zamer[j].nabl.date_month == dt_month)
 					{
