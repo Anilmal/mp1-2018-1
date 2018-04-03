@@ -67,6 +67,7 @@ ostream& operator<<(ostream& os, Observation& obj)
 	os << "Результат замера:" << obj.weight << endl;
 	return os;
 }
+//структура в которой будет содержаться (и вне записываться) первая дата
 
 //Структура для записи за каждым человеком результатов наблюдений
 struct Person
@@ -116,7 +117,7 @@ public:
 		delete[] Family;
 	}
 	//Устанавливает наблюдение для выбранного человека
-	void SetNabl(Observation nabl, string nam)
+	void SetWeighing(Observation nabl, string nam)
 	{
 		for (int i = 0;i < people;i++)
 		{
@@ -143,14 +144,14 @@ public:
 
 	}
 	//Установка первой даты (относится исключительно  к классу
-	void Setfirstdate(Date Fd)
+	void SetStartDate(Date Fd)
 	{
 
 		StartDate = Fd;
 
 	}
 	//Получение веса в выбранный день для выбранного человека
-	int Getweight(string Nam, int dt_day, int dt_mounth, int dt_year)
+	int GetWeight(string Nam, int dt_day, int dt_mounth, int dt_year)
 	{
 		for (int i = 0;i < people;i++)
 		{
@@ -168,13 +169,13 @@ public:
 		return 0;
 	}
 	//Получить начальную дату
-	Date Getfirstdate()
+	Date GetStartDate()
 	{
 
 		return StartDate;
 	}
 	//Получить минимальный вес для выбранного человека
-	int Minweight(string Nam)
+	int MinWeight(string Nam)
 	{
 		min = 0;
 
@@ -194,7 +195,7 @@ public:
 		return min;
 	}
 	//Получить максимальный вес для выбранного человека
-	int Maxweight(string Nam)
+	int MaxWeight(string Nam)
 	{
 		max = 0;
 		for (int j = 1; j < people; j++)
@@ -213,7 +214,7 @@ public:
 		return max;
 	}
 	//Получить средний вес человека за все время наблюдений
-	int Midweight(string Nam)
+	int AverageWeight(string Nam)
 	{
 		for (int i = 0;i < people;i++)
 		{
@@ -230,7 +231,7 @@ public:
 		}
 	}
 	//Получить средний вес человека в выбранном месяце
-	int Midweightofmonth(string Nam, int dt_month)
+	int AverageWeightforMonth(string Nam, int dt_month)
 	{
 		for (int i = 0;i < people;i++)
 		{
@@ -250,7 +251,7 @@ public:
 		}
 	}
 	//Запись в файл результатов
-	void writetofile()
+	void SavetoFile()
 	{
 		ofstream file;
 		file.open("result.txt");//создание файла
@@ -258,17 +259,18 @@ public:
 		{
 			file << Family[i].Name;
 			file << endl;
-			for (int j = 0;j < count;j++)
+			for (unsigned int j = 0;j <Family[i].zamer.size();j++)
 			{
 
 				file << Family[i].zamer[j];
 				file << endl;
+				count++;
 			}
 		}
 		file.close();//завершение
 	}
 	//Запись из файла
-	void writefromfile()
+	void WritefromFile()
 	{
 		ifstream file("result.txt");
 		char str[100];//временное хранение 
@@ -291,7 +293,7 @@ public:
 		}
 	}
 	//Добавить члена семьи
-	void addfam(string Name, Observation Fm)
+	void AddName(string Name, Observation Fm)
 	{
 		people += 1;//увеличиваем праметр колличества людей
 		Person *NewFamily;//создаем временный ммассив в который запише старые данные и новые
@@ -358,7 +360,7 @@ int main()
 		cout << "Введите год:";cin >> dt_year;cout << endl;
 		cout << "Введите вес:";cin >> weight_;cout << endl;
 		k.SetObservation(dt_day, dt_month, dt_year, weight_);
-		K.SetNabl(k, Name);
+		K.SetWeighing(k, Name);
 	}
 	cout << "Что желаете сделать дальше?"
 		<< "1-установить первую дату"
@@ -378,11 +380,11 @@ int main()
 		cout << "Введите месяц:";cin >> dt_month;cout << endl;
 		cout << "Введите год:";cin >> dt_year;cout << endl;
 		Fd.Setdate(dt_day, dt_month, dt_year);
-		K.Setfirstdate(Fd);
+		K.SetStartDate(Fd);
 	}
 	case 2:
 	{
-		cout << K.Getfirstdate() << endl;
+		cout << K.GetStartDate() << endl;
 	}
 	case 3:
 	{
@@ -393,7 +395,7 @@ int main()
 			cout << "Введите имя:";cin >> Name;cout << endl;
 			cout << "Введите месяц:";cin >> dt_month;cout << endl;
 			system("cls");
-			cout << K.Midweightofmonth(Name, dt_month);
+			cout << K.AverageWeightforMonth(Name, dt_month);
 			system("pause");
 
 		}
@@ -401,29 +403,29 @@ int main()
 		{
 			cout << "Введите имя:";cin >> Name;cout << endl;
 			system("cls");
-			cout << K.Midweight(Name);
+			cout << K.AverageWeight(Name);
 			system("pause");
 		}
 	}
 	case 4:
 	{
 		cout << "Введите имя члена семьи";cin >> Name;cout << endl;
-		cout << K.Minweight(Name) << endl;
+		cout << K.MinWeight(Name) << endl;
 		system("pause");
 	}
 	case 5:
 	{
 		cout << "Введите имя  члена семьи";cin >> Name;cout << endl;
-		cout << K.Maxweight(Name) << endl;
+		cout << K.MaxWeight(Name) << endl;
 		system("pause");
 	}
 	case 6:
 	{
-		K.writetofile();
+		K.SavetoFile();
 	}
 	case 7:
 	{
-		K.writefromfile();
+		K.WritefromFile();
 	}
 	case 8:
 	{
@@ -437,7 +439,7 @@ int main()
 		cout << "Введите год:";cin >> dt_year;cout << endl;
 		cout << "Введите вес:";cin >> weight_;cout << endl;
 		Fm.SetObservation(dt_day, dt_month, dt_year, weight_);
-		K.addfam(Name, Fm);
+		K.AddName(Name, Fm);
 	}
 	case 9:
 	{
