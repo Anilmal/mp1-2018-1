@@ -67,7 +67,6 @@ ostream& operator<<(ostream& os, Observation& obj)
 	os << "Результат замера:" << obj.weight << endl;
 	return os;
 }
-//структура в которой будет содержаться (и вне записываться) первая дата
 
 //Структура для записи за каждым человеком результатов наблюдений
 struct Person
@@ -117,19 +116,26 @@ public:
 		delete[] Family;
 	}
 	//Устанавливает наблюдение для выбранного человека
-	void SetNabl(Observation nabl, int number)
+	void SetNabl(Observation nabl, string nam)
 	{
 		for (int i = 0;i < people;i++)
 		{
-			if (i == number)
+			if (Family[i].Name == nam)
 			{
-				Family[i].Name = getchar();
 				Family[i].zamer.push_back(nabl);
 			}
 		}
 
 	}
-	//установка имен
+	//установка имени
+	void SetName()
+	{
+		for (int i = 0;i < people;i++)
+		{
+			Family[i].Name = getchar();
+		}
+	}
+	//изменения имени
 	void ChangeName(int number, string Nam)
 	{
 
@@ -144,13 +150,13 @@ public:
 
 	}
 	//Получение веса в выбранный день для выбранного человека
-	int Getweight(int number, int dt_day, int dt_mounth, int dt_year)
+	int Getweight(string Nam, int dt_day, int dt_mounth, int dt_year)
 	{
 		for (int i = 0;i < people;i++)
 		{
-			if (i == number)
+			if (Family[i].Name == Nam)
 			{
-				for (int j = 0;j < count;j++)
+				for (unsigned int j = 0;j < Family[i].zamer.size();j++)
 				{
 					if (Family[i].zamer[j].nabl.date_day == dt_day && Family[i].zamer[j].nabl.date_month == dt_mounth && Family[i].zamer[j].nabl.date_year == dt_year)
 					{
@@ -168,29 +174,40 @@ public:
 		return StartDate;
 	}
 	//Получить минимальный вес для выбранного человека
-	int Minweight(int number)
+	int Minweight(string Nam)
 	{
+		min = 0;
 
-		for (int j = 1; j < count; j++)
+		for (int j = 1; j < people; j++)
 		{
-			min = Family[number].zamer[0].weight;
-			if (Family[number].zamer[j].weight < min)
+			if (Family[j].Name == Nam)
 			{
-				min = Family[number].zamer[j].weight;
+				for (unsigned int i = 0;i < Family[j].zamer.size();i++)
+				{
+					if (Family[j].zamer[i].weight < min)
+					{
+						min = Family[j].zamer[j].weight;
+					}
+				}
 			}
 		}
 		return min;
 	}
 	//Получить максимальный вес для выбранного человека
-	int Maxweight(int number)
+	int Maxweight(string Nam)
 	{
-
-		for (int j = 1; j < count; j++)
+		max = 0;
+		for (int j = 1; j < people; j++)
 		{
-			max = Family[number].zamer[0].weight;
-			if (Family[number].zamer[j].weight > max)
+			if (Family[j].Name == Nam)
 			{
-				max = Family[number].zamer[j].weight;
+				for (unsigned int i = 0;i < Family[j].zamer.size();i++)
+				{
+					if (Family[j].zamer[i].weight > max)
+					{
+						max = Family[j].zamer[j].weight;
+					}
+				}
 			}
 		}
 		return max;
@@ -334,13 +351,14 @@ int main()
 	system("cls");
 	for (int i = 0;i < people;i++)
 	{
+		cout << "Введите имя:";cin >> Name;cout << endl;
 		cout << "Задайте наблюдение" << endl;
 		cout << "Введите день:";cin >> dt_day;cout << endl;
 		cout << "Введите месяц:";cin >> dt_month;cout << endl;
 		cout << "Введите год:";cin >> dt_year;cout << endl;
 		cout << "Введите вес:";cin >> weight_;cout << endl;
 		k.SetObservation(dt_day, dt_month, dt_year, weight_);
-		K.SetNabl(k, i);
+		K.SetNabl(k, Name);
 	}
 	cout << "Что желаете сделать дальше?"
 		<< "1-установить первую дату"
@@ -389,14 +407,14 @@ int main()
 	}
 	case 4:
 	{
-		cout << "Введите порядковый номер члена семьи";cin >> num;
-		cout << K.Minweight(num) << endl;
+		cout << "Введите имя члена семьи";cin >> Name;cout << endl;
+		cout << K.Minweight(Name) << endl;
 		system("pause");
 	}
 	case 5:
 	{
-		cout << "Введите порядковый номер члена семьи";cin >> num;
-		cout << K.Maxweight(num) << endl;
+		cout << "Введите имя  члена семьи";cin >> Name;cout << endl;
+		cout << K.Maxweight(Name) << endl;
 		system("pause");
 	}
 	case 6:
