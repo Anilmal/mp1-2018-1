@@ -1,4 +1,4 @@
-#include <cstdlib>
+п»ї#include <cstdlib>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -7,7 +7,7 @@ using namespace std;
 
 struct CheckCredit
 {
-	//Дата взятия кредита
+	//Р”Р°С‚Р° РІР·СЏС‚РёСЏ РєСЂРµРґРёС‚Р°
 	int date_day;
 	int date_month;
 	int date_year;
@@ -42,30 +42,30 @@ ostream& operator<<(ostream& os, CheckCredit& obj)
 	os << obj.date_day << ".";
 	os << obj.date_month << ".";
 	os << obj.date_year << endl;
-	os << "Срок кредита:\t" << obj.term << endl;
-	os << "Сумма кредита:\t" << obj.sum << endl;
-	os << "Годовой процент:\t" << obj.procent << endl;
+	os << "РЎСЂРѕРє РєСЂРµРґРёС‚Р°:\t" << obj.term << endl;
+	os << "РЎСѓРјРјР° РєСЂРµРґРёС‚Р°:\t" << obj.sum << endl;
+	os << "Р“РѕРґРѕРІРѕР№ РїСЂРѕС†РµРЅС‚:\t" << obj.procent << endl;
 	return os;
 }
 struct Crdt
 {
-	int sum[4];//сумма кредита
-	int interest_rate[4];//ставка
-	int srok;//срок
+	int sum[4];//СЃСѓРјРјР° РєСЂРµРґРёС‚Р°
+	int interest_rate[4];//СЃС‚Р°РІРєР°
+	int srok;//СЃСЂРѕРє
 	friend ostream& operator<<(ostream& os, Crdt& obj);
 };
 ostream& operator<<(ostream& os, Crdt& obj)
 {
-	os << "Срок кредита:\t" << obj.srok << endl;
+	os << "РЎСЂРѕРє РєСЂРµРґРёС‚Р°:\t" << obj.srok << endl;
 	for (int i = 0;i < 4;i++)
 	{
-		os << "Сумма кредита:\t" << obj.sum;
-		os << "Годовой процент:\t" << obj.interest_rate << endl;
+		os << "РЎСѓРјРјР° РєСЂРµРґРёС‚Р°:\t" << obj.sum;
+		os << "Р“РѕРґРѕРІРѕР№ РїСЂРѕС†РµРЅС‚:\t" << obj.interest_rate << endl;
 	}
 	os << "-/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/" << endl;
 	return os;
 }
-struct Info//структура информации о кредите
+struct Info//СЃС‚СЂСѓРєС‚СѓСЂР° РёРЅС„РѕСЂРјР°С†РёРё Рѕ РєСЂРµРґРёС‚Рµ
 {
 	Crdt inf_credit[20];
 	Info()
@@ -144,8 +144,8 @@ struct Client
 	string Name;
 	string Surname;
 	string Patronymic;
-	string account_number;//номер зарплатного счета
-	int cash;//сумма на зарплатном счете
+	string account_number;//РЅРѕРјРµСЂ Р·Р°СЂРїР»Р°С‚РЅРѕРіРѕ СЃС‡РµС‚Р°
+	int cash;//СЃСѓРјРјР° РЅР° Р·Р°СЂРїР»Р°С‚РЅРѕРј СЃС‡РµС‚Рµ
 	string pasword;
 	Info Crdit;
 	CheckCredit mycredit;
@@ -176,16 +176,16 @@ struct Client
 ostream& operator<<(ostream& os, Client& obj)
 {
 	string choice;
-	os << "Здравствуйте," << obj.Name << "!";
-	os << "Желаете узнать информацию о доступных кредитах?";
+	os << "Р—РґСЂР°РІСЃС‚РІСѓР№С‚Рµ," << obj.Name << "!";
+	os << "Р–РµР»Р°РµС‚Рµ СѓР·РЅР°С‚СЊ РёРЅС„РѕСЂРјР°С†РёСЋ Рѕ РґРѕСЃС‚СѓРїРЅС‹С… РєСЂРµРґРёС‚Р°С…?";
 	cin >> choice;
-	if (choice == "Да")
+	if (choice == "Р”Р°")
 	{
 		cout << obj.Crdit;
 	}
-	if (choice != "Да")
+	if (choice != "Р”Р°")
 	{
-		os << "Прощайте,Удачного Дня!" << endl;
+		os << "РџСЂРѕС‰Р°Р№С‚Рµ,РЈРґР°С‡РЅРѕРіРѕ Р”РЅСЏ!" << endl;
 	}
 	return os;
 };
