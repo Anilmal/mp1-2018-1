@@ -5,35 +5,36 @@
 
 using namespace std;
 
+//Структура взятого кредита 
 struct CheckCredit
 {
 	//Дата взятия кредита
 	int date_day;
 	int date_month;
 	int date_year;
-	//
+	//Информация о кредите
 	int term;
 	int sum;
 	int procent;
-	CheckCredit()
-	{
-		term = 0;
-		sum = 0;
-		procent = 0;
-		date_day = 0;
-		date_month = 0;
-		date_year = 0;
-
-	}
+	//Проверка кредита 
 	bool emptycredit()
 	{
-
-		if (term == 0 && sum == 0 && procent == 0 && date_day == 0 && date_month == 0 && date_year == 0)
+		if (sum == 0)
 		{
+			date_day = 0;
+			date_month = 0;
+			date_year = 0;
+			term = 0;
+			procent = 0;
 			return false;
 		}
 		else
 			return true;
+	}
+	//Начисление 
+	void pay(int pay_)
+	{
+		sum -= pay_;
 	}
 	friend ostream& operator<<(ostream& os, CheckCredit& obj);
 };
@@ -47,98 +48,130 @@ ostream& operator<<(ostream& os, CheckCredit& obj)
 	os << "Годовой процент:\t" << obj.procent << endl;
 	return os;
 }
+
+//Структра информации о доступных кредитах
 struct Crdt
 {
-	int sum[4];//сумма кредита
-	int interest_rate[4];//ставка
+	int sum[3];//сумма кредита
+	int interest_rate[3];//ставка
 	int srok;//срок
-	friend ostream& operator<<(ostream& os, Crdt& obj);
+	friend ostream& operator<<(ostream& os, const Crdt& obj);
 };
-ostream& operator<<(ostream& os, Crdt& obj)
+ostream& operator<<(ostream& os, const Crdt& obj)
 {
 	os << "Срок кредита:\t" << obj.srok << endl;
-	for (int i = 0;i < 4;i++)
+	for (int i = 0;i < 3;i++)
 	{
-		os << "Сумма кредита:\t" << obj.sum;
-		os << "Годовой процент:\t" << obj.interest_rate << endl;
+		os << "Сумма кредита:\t" << obj.sum[i] << "-" << obj.sum[i + 1] << "\t";
+		os << "Годовой процент:\t" << obj.interest_rate[i] << "%" << endl;
 	}
 	os << "-/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/" << endl;
 	return os;
 }
-struct Info//структура информации о кредите
+
+//структура информации о кредите
+struct Info
 {
-	Crdt inf_credit[20];
+	Crdt inf_credit[4];
 	Info()
 	{
-		for (int j1 = 0;j1 < 3;j1++)
+		//установка информации о достпуных кредитах
+		inf_credit[0].srok = 1;
+		inf_credit[0].sum[0] = 100000;
+		inf_credit[0].sum[1] = 500000;
+		inf_credit[0].sum[2] = 1000000;
+		inf_credit[0].sum[3] = 3000000;
+
+		inf_credit[1].srok = 2;
+		inf_credit[1].sum[0] = 100000;
+		inf_credit[1].sum[1] = 500000;
+		inf_credit[1].sum[2] = 1000000;
+		inf_credit[1].sum[3] = 3000000;
+
+		inf_credit[2].srok = 3;
+		inf_credit[2].sum[0] = 100000;
+		inf_credit[2].sum[1] = 500000;
+		inf_credit[2].sum[2] = 1000000;
+		inf_credit[2].sum[3] = 3000000;
+
+		inf_credit[3].srok = 5;
+		inf_credit[3].sum[0] = 100000;
+		inf_credit[3].sum[1] = 500000;
+		inf_credit[3].sum[2] = 1000000;
+		inf_credit[3].sum[3] = 3000000;
+
+		inf_credit[4].srok = 15;
+		inf_credit[4].sum[0] = 100000;
+		inf_credit[4].sum[1] = 500000;
+		inf_credit[4].sum[2] = 1000000;
+		inf_credit[4].sum[3] = 3000000;
+
+		//установка процентной ставки
+		for (int i = 0;i < 4;i++)
 		{
-			inf_credit[j1].srok = 1;
-			inf_credit[j1].sum[0] = 100000;
-			inf_credit[j1].sum[1] = 500000;
-			inf_credit[j1].sum[2] = 1000000;
-			inf_credit[j1].sum[3] = 3000000;
-		}
-		for (int j2 = 4;j2 < 7;j2++)
-		{
-			inf_credit[j2].srok = 2;
-			inf_credit[j2].sum[0] = 100000;
-			inf_credit[j2].sum[1] = 500000;
-			inf_credit[j2].sum[2] = 1000000;
-			inf_credit[j2].sum[3] = 3000000;
-		}
-		for (int j3 = 8;j3 < 11;j3++)
-		{
-			inf_credit[j3].srok = 3;
-			inf_credit[j3].sum[0] = 100000;
-			inf_credit[j3].sum[1] = 500000;
-			inf_credit[j3].sum[2] = 1000000;
-			inf_credit[j3].sum[3] = 3000000;
-		}
-		for (int j4 = 12;j4 < 15;j4++)
-		{
-			inf_credit[j4].srok = 5;
-			inf_credit[j4].sum[0] = 100000;
-			inf_credit[j4].sum[1] = 500000;
-			inf_credit[j4].sum[2] = 1000000;
-			inf_credit[j4].sum[3] = 3000000;
-		}
-		for (int j5 = 16;j5 < 19;j5++)
-		{
-			inf_credit[j5].srok = 15;
-			inf_credit[j5].sum[0] = 100000;
-			inf_credit[j5].sum[1] = 500000;
-			inf_credit[j5].sum[2] = 1000000;
-			inf_credit[j5].sum[3] = 3000000;
-		}
-		for (unsigned int i = 0;i < 19;i++)
-		{
-			for (int l = 0;l<4;l++)
-				inf_credit[i].interest_rate[l] = 100 * inf_credit[i].sum[l] / (inf_credit[i].srok * 12);
+			for (int l = 0;l < 3;l++)
+				inf_credit[i].interest_rate[l] = (inf_credit[i].sum[l] / 3) / (inf_credit[i].srok * 365 * 12);
 		}
 	}
-	bool Chech(int sum_, int interest_rate_, int srok_, int cash_)
+	//Проверка на возможность взятия кредита
+	bool Check(int sum_, int srok_, int cash_)
 	{
 		int test;
-		test = 6 * sum_ / (interest_rate_ / 12);
-		if (cash_ >= test)
+		for (int i = 0;i < 4;i++)
 		{
-			return true;
-		}
-		else
-		{
-			return false;
+			if (inf_credit[i].srok == srok_)
+			{
+				for (int l = 0;l < 3;l++)
+				{
+					if (inf_credit[i].sum[l] < sum_ && sum_ < inf_credit[i].sum[l + 1])
+					{
+						test = 6 * sum_ / (inf_credit[i].interest_rate[l] / 12);
+						if (cash_ >= test)
+						{
+							return true;
+						}
+						else
+						{
+							return false;
+						}
+					}
+				}
+			}
 		}
 	}
-	friend ostream& operator<<(ostream& os, Info& obj);
+	//Выдать кредит для выбранных данных
+	int TakeProcent(int sum_, int srok_, int cash_)
+	{
+		for (int i = 0;i < 4;i++)
+		{
+			if (inf_credit[i].srok == srok_)
+			{
+				for (int l = 0;l < 3;l++)
+				{
+					if (inf_credit[i].sum[l] < sum_ && sum_ < inf_credit[i].sum[l + 1])
+					{
+						return inf_credit[i].interest_rate[l];
+					}
+					else
+					{
+						return 0;
+					}
+				}
+			}
+		}
+	}
+	friend ostream& operator<<(ostream& os, const Info& obj);
 };
-ostream& operator<<(ostream& os, Info& obj)
+ostream& operator<<(ostream& os, const Info& obj)
 {
-	for (unsigned int i = 0;i < 20;i++)
+	for (unsigned int i = 0;i < 4;i++)
 	{
 		os << obj.inf_credit[i] << endl;
 	}
 	return os;
 }
+
+//Информация о клиенте
 struct Client
 {
 	string Name;
@@ -147,8 +180,9 @@ struct Client
 	string account_number;//номер зарплатного счета
 	int cash;//сумма на зарплатном счете
 	string pasword;
-	Info Crdit;
-	CheckCredit mycredit;
+	Info Crdit;//доступная информация о кредитах
+	CheckCredit mycredit;//имеющийся кредит
+						 //Устанавливаю кредит
 	void SetCheckCredit(int term_, int sum_, int procent_, int day_, int month_, int year_)
 	{
 		mycredit.term = term_;
@@ -158,6 +192,7 @@ struct Client
 		mycredit.date_month = month_;
 		mycredit.date_year = year_;
 	}
+	//проверка имеется ли кредит
 	bool HaveMyCredit()
 	{
 		if (mycredit.emptycredit() == false)
@@ -167,6 +202,7 @@ struct Client
 		else
 			return false;
 	}
+	//Вывести исмеющийся кредит
 	CheckCredit GetMyCredit()
 	{
 		return mycredit;
@@ -175,71 +211,54 @@ struct Client
 };
 ostream& operator<<(ostream& os, Client& obj)
 {
-	string choice;
-	os << "Здравствуйте," << obj.Name << "!";
-	os << "Желаете узнать информацию о доступных кредитах?";
-	cin >> choice;
-	if (choice == "Да")
-	{
-		cout << obj.Crdit;
-	}
-	if (choice != "Да")
-	{
-		os << "Прощайте,Удачного Дня!" << endl;
-	}
+	os << obj.Name << endl;
+	os << obj.Surname << endl;
+	os << obj.Patronymic << endl;
+	os << obj.account_number << endl;
 	return os;
 };
+
+//База клиентов
 class ProcessingCenter
 {
 private:
 	vector <Client> person;
 
 public:
-	ProcessingCenter()
+	//Добавить пользователя
+	void SetClient(string Nam, string Sur, string Pat, string pasw, string acc_num, int cash_)
 	{
-
+		Client new_user;
+		new_user.Name = Nam;
+		new_user.Surname = Sur;
+		new_user.Patronymic = Pat;
+		new_user.account_number = acc_num;
+		new_user.cash = cash_;
+		person.push_back(new_user);
 	}
-	void SetClient(string Nam, string Sur, string Pat)
-	{
-		Client user;
-		user.Name = Nam;
-		user.Surname = Sur;
-		user.Patronymic = Pat;
-		person.push_back(user);
-	}
-	void SetAccount(string Nam, string Sur, string Pat, string pasw, string acc_num, int cash_)
-	{
-		for (unsigned i = 0;i < person.size();i++)
-		{
-			if (person[i].Name == Nam && person[i].Surname == Sur && person[i].Patronymic == Pat)
-			{
-
-				person[i].account_number = acc_num;
-				person[i].pasword = pasw;
-				person[i].cash = cash_;
-			}
-		}
-	}
+	//Вывести аккаунт
 	string GetAccnum(string Nam, string Sur, string Pat, string pasw)
 	{
 		for (unsigned i = 0;i < person.size();i++)
 		{
 			if (person[i].Name == Nam && person[i].Surname == Sur && person[i].Patronymic == Pat && person[i].pasword == pasw)
 			{
-				person[i].account_number;
+				return person[i].account_number;
 			}
 		}
 	}
+	//Вывести деньги на счете
 	int GetCash(string Nam, string Sur, string Pat, string pasw)
 	{
 		for (unsigned i = 0;i < person.size();i++)
 		{
 			if (person[i].Name == Nam && person[i].Surname == Sur && person[i].Patronymic == Pat && person[i].pasword == pasw)
 			{
-				person[i].cash;
+				return person[i].cash;
 			}
 		}
 	}
+	//Вывести пароль
 	string Getpasword(string Nam, string Sur, string Pat, string acc_num)
 	{
 		for (unsigned i = 0;i < person.size();i++)
@@ -250,6 +269,7 @@ public:
 			}
 		}
 	}
+	//Вывести клиента
 	Client GetClient(string Nam, string Sur, string Pat, string pasw)
 	{
 		for (unsigned i = 0;i < person.size();i++)
@@ -260,6 +280,7 @@ public:
 			}
 		}
 	}
+	//вывести инфопмацию о кредите
 	Info GetInfo(string Nam, string Sur, string Pat)
 	{
 		for (unsigned i = 0;i < person.size();i++)
@@ -271,16 +292,15 @@ public:
 		}
 	}
 };
+
+//Класс получения кредит
 class Credit
 {
 private:
 	ProcessingCenter request;
 	Client man;
 public:
-	Credit()
-	{
-
-	}
+	//авторизация клиента
 	Client Authorization(string Nam, string Sur, string Pat, string pasw)
 	{
 		man = request.GetClient(Nam, Sur, Pat, pasw);
@@ -288,21 +308,109 @@ public:
 		man.cash = request.GetCash(Nam, Sur, Pat, pasw);
 		return request.GetClient(Nam, Sur, Pat, pasw);
 	}
+	//Показать клиенту инфу
 	Info GetInfoCredit()
 	{
 		return request.GetInfo(man.Name, man.Surname, man.Patronymic);
 	}
-	void ChoiceOfCredit(int sum_, int interest_rate_, int srok_, int cash_, int day, int month, int year)
+	//Выбор и проверка кредита
+	void ChoiceOfCredit(int sum_, int srok_, int cash_, int day, int month, int year)
 	{
-		man.Crdit.Chech(sum_, interest_rate_, srok_, cash_);
-		man.SetCheckCredit(srok_, sum_, interest_rate_, day, month, year);
+		man.Crdit.Check(sum_, srok_, cash_);
+		man.SetCheckCredit(srok_, sum_, man.Crdit.TakeProcent(sum_, srok_, cash_), day, month, year);
 	}
+	//Имеется ли кредит у клиента
 	bool CheckGetCredit()
 	{
-
 		if (man.HaveMyCredit() == true)
 			return true;
 		else
 			return false;
 	}
+	//Начисления за кредит
+	void PayforCredit(int pay_)
+	{
+		man.mycredit.pay(pay_);
+	}
+	//Погашение кредита
+	friend int Redemption(Credit&);
 };
+int Redemption(Credit &obj)
+{
+	int redem_;
+in:	cout << obj.man.mycredit;
+	cout << "Введите сумму погашения" << endl;
+	cin >> redem_;
+
+	obj.man.mycredit.sum -= redem_;
+	if (obj.man.mycredit.emptycredit() == true)
+	{
+		cout << "Кредит погашен" << endl;
+		return 0;
+	}
+	else
+	{
+		cout << "Вы не погасили кредит";
+		goto in;
+	}
+}
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	string nam;
+	string pat;
+	string sur;
+	string ac_num;
+	string pasw;
+	int money;
+	int srok_of_credit;
+	int sum;
+	int date_day;
+	int date_month;
+	int date_year;
+	int pay_;
+	ProcessingCenter Base;
+	Credit Bank;
+	cout << "Введите имя:\t";
+	cin >> nam;
+	cout << "Введите отчество:\t";
+	cin >> sur;
+	cout << "Введите фамилия:\t";
+	cin >> pat;
+	cout << "Введите номер зарплатного счета:\t";
+	cin >> ac_num;
+	cout << "Введите пароль:\t";
+	cin >> pasw;
+	cout << "Сумму на зарплатном счету:\t";
+	cin >> money;
+	Base.SetClient(nam, sur, pat, ac_num, pasw, money);
+	cout << Base.GetAccnum(nam, sur, pat, pasw) << endl;
+	cout << Base.GetCash(nam, sur, pat, pasw) << endl;
+	cout << Base.Getpasword(nam, sur, pat, pasw) << endl;
+	cout << Base.GetInfo(nam, sur, pat);
+	Bank.Authorization(nam, sur, pat, pasw);
+	cout << "Введите срок кредита:\t";
+	cin >> srok_of_credit;
+	cout << "Введите сумму кредита:\t";
+	cin >> sum;
+	cout << "Введите дату взятия кредита" << endl;
+	cout << "День:\t";
+	cin >> date_day;
+	cout << "Месяц:\t";
+	cin >> date_month;
+	cout << "Год:\t";
+	cin >> date_year;
+	Bank.ChoiceOfCredit(sum, srok_of_credit, money, date_day, date_month, date_year);
+	cout << "Проверка на наличие кредита" << endl;
+	if (Bank.CheckGetCredit() == true)
+		cout << "Кредитов нет" << endl;
+	if (Bank.CheckGetCredit() == false)
+		cout << "У Вас есть активные кредиты" << endl;
+	cout << "Оплатите кредит,введите сумму" << endl;
+	cin >> pay_;
+	Bank.PayforCredit(pay_);
+	cout << "Погашение кредита" << endl;
+	Redemption(Bank);
+	system("pause");
+}
