@@ -232,6 +232,7 @@ public:
 		new_user.Name = Nam;
 		new_user.Surname = Sur;
 		new_user.Patronymic = Pat;
+		new_user.pasword = pasw;
 		new_user.account_number = acc_num;
 		new_user.cash = cash_;
 		person.push_back(new_user);
@@ -384,7 +385,7 @@ int main()
 	cin >> pasw;
 	cout << "Сумму на зарплатном счету:\t";
 	cin >> money;
-	Base.SetClient(nam, sur, pat, ac_num, pasw, money);
+	Base.SetClient(nam, sur, pat, pasw, ac_num, money);
 	cout << Base.GetAccnum(nam, sur, pat, pasw) << endl;
 	cout << Base.GetCash(nam, sur, pat, pasw) << endl;
 	cout << Base.Getpasword(nam, sur, pat, pasw) << endl;
@@ -413,4 +414,3 @@ int main()
 	cout << "Погашение кредита" << endl;
 	Redemption(Bank);
 	system("pause");
-}
