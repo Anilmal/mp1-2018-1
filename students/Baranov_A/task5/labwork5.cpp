@@ -62,9 +62,15 @@ ostream& operator<<(ostream& os, const Crdt& obj)
 	os << "Срок кредита:\t" << obj.srok << endl;
 	for (int i = 0;i < 3;i++)
 	{
+
+
 		os << "Сумма кредита:\t" << obj.sum[i] << "-" << obj.sum[i + 1] << "\t";
 		os << "Годовой процент:\t" << obj.interest_rate[i] << "%" << endl;
+
 	}
+	os << "Сумма кредита:\t" << obj.sum[3] << "-" << "и т.д" << "\t";
+	os << "Годовой процент:\t" << obj.interest_rate[3] << "%" << endl;
+
 	os << "-/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/ -/" << endl;
 	return os;
 }
@@ -121,7 +127,7 @@ struct Info
 		{
 			if (inf_credit[i].srok == srok_)
 			{
-				for (int l = 0;l < 3;l++)
+				for (int l = 0;l < 2;l++)
 				{
 					if (inf_credit[i].sum[l] < sum_ && sum_ < inf_credit[i].sum[l + 1])
 					{
@@ -223,12 +229,11 @@ class ProcessingCenter
 {
 private:
 	vector <Client> person;
-
+	Client new_user;
 public:
 	//Добавить пользователя
 	void SetClient(string Nam, string Sur, string Pat, string pasw, string acc_num, int cash_)
 	{
-		Client new_user;
 		new_user.Name = Nam;
 		new_user.Surname = Sur;
 		new_user.Patronymic = Pat;
@@ -390,6 +395,7 @@ int main()
 	cout << Base.GetCash(nam, sur, pat, pasw) << endl;
 	cout << Base.Getpasword(nam, sur, pat, pasw) << endl;
 	cout << Base.GetInfo(nam, sur, pat);
+	system("pause");
 	Bank.Authorization(nam, sur, pat, pasw);
 	cout << "Введите срок кредита:\t";
 	cin >> srok_of_credit;
@@ -414,3 +420,4 @@ int main()
 	cout << "Погашение кредита" << endl;
 	Redemption(Bank);
 	system("pause");
+}
