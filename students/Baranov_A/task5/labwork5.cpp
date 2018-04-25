@@ -312,9 +312,9 @@ public:
 	}
 	ProcessingCenter operator = (const ProcessingCenter& obj)
 	{
-		for (unsigned i = 0;i < person.size();i++)
+		for (unsigned i = 0;i < obj.person.size();i++)
 		{
-			person[i] = obj.person[i];
+			person.push_back (obj.person[i]);
 		}
 		return *this;
 	}
