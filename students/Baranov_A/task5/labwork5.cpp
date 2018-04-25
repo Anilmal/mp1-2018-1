@@ -310,6 +310,15 @@ public:
 			}
 		}
 	}
+	ProcessingCenter operator = (const ProcessingCenter& obj)
+	{
+		for (unsigned i = 0;i < person.size();i++)
+		{
+			person[i] = obj.person[i];
+		}
+		return *this;
+	}
+
 };
 
 //Класс получения кредит
@@ -319,6 +328,11 @@ private:
 	ProcessingCenter request;
 	Client man;
 public:
+	//Подключаю базу клиентов
+	void SetBase(ProcessingCenter Base_)
+	{
+		request = Base_;
+	}
 	//авторизация клиента
 	Client Authorization(string Nam, string Sur, string Pat, string pasw, string acc_num)
 	{
@@ -407,6 +421,7 @@ int main()
 	cout << Base.GetCash(nam, sur, pat, pasw) << endl;
 	cout << Base.Getpasword(nam, sur, pat, pasw) << endl;
 	cout << Base.GetInfo(nam, sur, pat);
+	Bank.SetBase(Base);
 	system("pause");
 	Bank.Authorization(nam, sur, pat, pasw, ac_num);
 	cout << "Введите срок кредита:\t";
