@@ -188,7 +188,17 @@ struct Client
 	string pasword;
 	Info Crdit;//доступная информация о кредитах
 	CheckCredit mycredit;//имеющийся кредит
-						 //Устанавливаю кредит
+	Client operator = (const Client& obj)
+	{
+		Name = obj.Name;
+		Surname = obj.Surname;
+		Patronymic = obj.Patronymic;
+		account_number = obj.account_number;
+		cash = obj.cash;
+		pasword = obj.pasword;
+		return *this;
+	}
+	//Устанавливаю кредит
 	void SetCheckCredit(int term_, int sum_, int procent_, int day_, int month_, int year_)
 	{
 		mycredit.term = term_;
@@ -276,11 +286,11 @@ public:
 		}
 	}
 	//Вывести клиента
-	Client GetClient(string Nam, string Sur, string Pat, string pasw)
+	Client GetClient(string Nam, string Sur, string Pat, string pasw, string acc_num)
 	{
 		for (unsigned i = 0;i < person.size();i++)
 		{
-			if (person[i].Name == Nam && person[i].Surname == Sur && person[i].Patronymic == Pat && person[i].pasword == pasw)
+			if (person[i].Name == Nam && person[i].Surname == Sur && person[i].Patronymic == Pat && person[i].pasword == pasw  && person[i].account_number == acc_num)
 			{
 				return person[i];
 			}
@@ -307,12 +317,12 @@ private:
 	Client man;
 public:
 	//авторизация клиента
-	Client Authorization(string Nam, string Sur, string Pat, string pasw)
+	Client Authorization(string Nam, string Sur, string Pat, string pasw, string acc_num)
 	{
-		man = request.GetClient(Nam, Sur, Pat, pasw);
+		man = request.GetClient(Nam, Sur, Pat, pasw, acc_num);
 		man.account_number = request.GetAccnum(Nam, Sur, Pat, pasw);
 		man.cash = request.GetCash(Nam, Sur, Pat, pasw);
-		return request.GetClient(Nam, Sur, Pat, pasw);
+		return request.GetClient(Nam, Sur, Pat, pasw, acc_num);
 	}
 	//Показать клиенту инфу
 	Info GetInfoCredit()
@@ -396,7 +406,7 @@ int main()
 	cout << Base.Getpasword(nam, sur, pat, pasw) << endl;
 	cout << Base.GetInfo(nam, sur, pat);
 	system("pause");
-	Bank.Authorization(nam, sur, pat, pasw);
+	Bank.Authorization(nam, sur, pat, pasw, ac_num);
 	cout << "Введите срок кредита:\t";
 	cin >> srok_of_credit;
 	cout << "Введите сумму кредита:\t";
