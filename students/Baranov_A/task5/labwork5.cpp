@@ -52,8 +52,8 @@ ostream& operator<<(ostream& os, CheckCredit& obj)
 //Структра информации о доступных кредитах
 struct Crdt
 {
-	int sum[3];//сумма кредита
-	int interest_rate[3];//ставка
+	int sum[4];//сумма кредита
+	int interest_rate[4];//ставка
 	int srok;//срок
 	friend ostream& operator<<(ostream& os, const Crdt& obj);
 };
@@ -78,7 +78,7 @@ ostream& operator<<(ostream& os, const Crdt& obj)
 //структура информации о кредите
 struct Info
 {
-	Crdt inf_credit[4];
+	Crdt inf_credit[5];
 	Info()
 	{
 		//установка информации о достпуных кредитах
@@ -116,7 +116,10 @@ struct Info
 		for (int i = 0;i < 4;i++)
 		{
 			for (int l = 0;l < 3;l++)
+			{
 				inf_credit[i].interest_rate[l] = (inf_credit[i].sum[l] / 3) / (inf_credit[i].srok * 365 * 12);
+			}
+			inf_credit[i].interest_rate[3] = (inf_credit[i].sum[3] / 8) / (inf_credit[i].srok * 365 * 12);
 		}
 	}
 	//Проверка на возможность взятия кредита
@@ -152,7 +155,7 @@ struct Info
 		{
 			if (inf_credit[i].srok == srok_)
 			{
-				for (int l = 0;l < 3;l++)
+				for (int l = 0;l < 2;l++)
 				{
 					if (inf_credit[i].sum[l] < sum_ && sum_ < inf_credit[i].sum[l + 1])
 					{
@@ -320,7 +323,6 @@ public:
 	Client Authorization(string Nam, string Sur, string Pat, string pasw, string acc_num)
 	{
 		man = request.GetClient(Nam, Sur, Pat, pasw, acc_num);
-		man.account_number = request.GetAccnum(Nam, Sur, Pat, pasw);
 		man.cash = request.GetCash(Nam, Sur, Pat, pasw);
 		return request.GetClient(Nam, Sur, Pat, pasw, acc_num);
 	}
