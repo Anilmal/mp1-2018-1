@@ -30,11 +30,17 @@ public:
 	void SetGame(int lenght_)
 	{
 		lenght = lenght_;
+		vector<int> tmp;
+		for (int i = 0;i <= 9;i++)
+		{
+			tmp.push_back(i);
+		}
+		random_shuffle(tmp.begin(), tmp.end());
 		for (int j = 0;j < (lenght + 1);j++)
 		{
-			Slovo.push_back(j);
+			Slovo.push_back(tmp[j]);
 		}
-		random_shuffle(Slovo.begin(), Slovo.end());
+
 	}
 	void ShowRules()
 	{
@@ -218,6 +224,7 @@ int main()
 					steps++;
 					goto in;
 				case 2:
+					system("cls");
 					play = 1;
 				}
 			}
@@ -231,4 +238,3 @@ int main()
 	}
 	return 0;
 }
-
