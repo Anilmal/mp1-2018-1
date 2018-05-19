@@ -148,6 +148,7 @@ public:
 	{
 		count_of_cows = 0;
 		count_of_bulls = 0;
+		number.clear();
 	}
 };
 
@@ -185,11 +186,11 @@ int main()
 		Player Me(Play);
 		int choice = 0;
 		int steps = 0;
+	in:	cout << "Введите число с неповторяющимися цифрами: ";
+		cin >> num;
 		COORD coordinats;
 		coordinats.X = 20;
 		coordinats.Y = 15;
-	in:	cout << "Введите число с неповторяющимися цифрами: ";
-		cin >> num;
 		if (Me.SetNumber(num) == true)
 		{
 			steps++;
