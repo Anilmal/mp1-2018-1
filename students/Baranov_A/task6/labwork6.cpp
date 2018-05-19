@@ -121,30 +121,39 @@ public:
 	}
 	void SaveRecords(int steps)
 	{
-		
-		for (int i = 11;i > 0;i--)
+		Records[11] = steps;
+		int left = 0;
+		int right = 10;
+		while (left < right)
 		{
-			if (Records[i] < steps && Records[i-1]>steps)
+			while ((Records[right] >= steps) && (left < right))
+				right--;
+			if (left != right)
 			{
-				Records[i] = steps;
+				Records[left] = Records[right];
+				left++;
 			}
-			if (Records[i] > steps)
+			while ((Records[left] <= steps) && (left < right))
+				left++;
+			if (left != right)
 			{
-				break;
+				Records[right] = Records[left];
+				right--;
 			}
-			if (Records[1] < steps)
-			{
-				Records[i] = steps;
-			}
+
 		}
-		
 	};
 	void ShowRecords()
 	{
-		for (int i = 1;i < 10;i++)
+		for (int i = 0;i < 10;i++)
 		{
 			cout << Records[i] << endl;
 		}
+	}
+	void EndOfStep()
+	{
+		count_of_cows = 0;
+		count_of_bulls = 0;
 	}
 };
 
@@ -204,20 +213,22 @@ int main()
 			{
 				SetConsoleCursorPosition(h, coordinats);
 				cout << "Желате продолжить?" << endl;
-				coordinats.X = 20;
+				coordinats.X = 22;
 				coordinats.Y = 16;
 				SetConsoleCursorPosition(h, coordinats);
 				cout << "1-Да" << endl;
-				coordinats.X = 20;
-				coordinats.Y = 17;
+				coordinats.X = 22;
+				coordinats.Y = 20;
 				SetConsoleCursorPosition(h, coordinats);
 				cout << "2-Нет" << endl;
 				cin >> choice;
+				system("cls");
 				switch (choice)
 				{
 				case 1:
 					system("cls");
 					steps++;
+					Me.EndOfStep();
 					goto in;
 				case 2:
 					system("cls");
