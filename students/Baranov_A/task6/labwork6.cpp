@@ -121,26 +121,20 @@ public:
 	}
 	void SaveRecords(int steps)
 	{
-		Records[11] = steps;
-		int left = 0;
-		int right = 10;
-		while (left < right)
+		for (int i = 11;i > 0;i--)
 		{
-			while ((Records[right] >= steps) && (left < right))
-				right--;
-			if (left != right)
+			if (Records[i] < steps && Records[i - 1]>steps)
 			{
-				Records[left] = Records[right];
-				left++;
+				Records[i] = steps;
 			}
-			while ((Records[left] <= steps) && (left < right))
-				left++;
-			if (left != right)
+			if (Records[i] > steps)
 			{
-				Records[right] = Records[left];
-				right--;
+				break;
 			}
-
+			if (Records[1] < steps)
+			{
+				Records[1] = steps;
+			}
 		}
 	};
 	void ShowRecords()
