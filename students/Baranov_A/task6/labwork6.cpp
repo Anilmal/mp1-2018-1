@@ -4,10 +4,8 @@
 #include <algorithm>
 #include <vector>
 #include <ctype.h>
-#include <windows.h>
 
 using namespace std;
-HANDLE h = GetStdHandle(STD_OUTPUT_HANDLE);
 
 class Game
 {
@@ -64,6 +62,7 @@ private:
 	int count_of_cows;
 	int count_of_bulls;
 	int Records[11];
+	int **Steps;
 public:
 	Player() : Game() {};
 	Player(Game obj)
@@ -101,10 +100,9 @@ public:
 		{
 			for (int j = 0;j < lenght;j++)
 			{
-				if (number[i] == Slovo[j])
+				if (number[i] == Slovo[j] && i != j)
 				{
-					if (i != j)
-						count_of_cows++;
+					count_of_cows++;
 				}
 			}
 		}
@@ -121,20 +119,26 @@ public:
 	}
 	void SaveRecords(int steps)
 	{
-		for (int i = 11;i > 0;i--)
+		Records[11] = steps;
+		int left = 0;
+		int right = 10;
+		while (left < right)
 		{
-			if (Records[i] < steps && Records[i - 1]>steps)
+			while ((Records[right] >= steps) && (left < right))
+				right--;
+			if (left != right)
 			{
-				Records[i] = steps;
+				Records[left] = Records[right];
+				left++;
 			}
-			if (Records[i] > steps)
+			while ((Records[left] <= steps) && (left < right))
+				left++;
+			if (left != right)
 			{
-				break;
+				Records[right] = Records[left];
+				right--;
 			}
-			if (Records[1] < steps)
-			{
-				Records[1] = steps;
-			}
+
 		}
 	};
 	void ShowRecords()
@@ -146,8 +150,8 @@ public:
 	}
 	void EndOfStep()
 	{
-		count_of_cows = 0;
 		count_of_bulls = 0;
+		count_of_cows = 0;
 		number.clear();
 	}
 };
@@ -184,37 +188,44 @@ int main()
 	while (play == 0)
 	{
 		Player Me(Play);
+		vector<int> Mycows;
+		vector<int> Mybulls;
+		vector<string> Mynumber;
 		int choice = 0;
-		int steps = 0;
+		int steps = 1;
 	in:	cout << "Введите число с неповторяющимися цифрами: ";
 		cin >> num;
-		COORD coordinats;
-		coordinats.X = 20;
-		coordinats.Y = 15;
 		if (Me.SetNumber(num) == true)
 		{
-			steps++;
-			cout << "Число коров-" << Me.CheckCows() << endl;
-			cout << "Число быков-" << Me.CheckBulls() << endl;
-			if (lenght == Me.CheckBulls())
+			int bulls = 0;
+			int cows = 0;
+			bulls = Me.CheckBulls();
+			cows = Me.CheckCows();
+			cout << "Число коров-" << cows << endl;
+			cout << "Число быков-" << bulls << endl;
+			Mycows.push_back(cows);
+			Mybulls.push_back(bulls);
+			Mynumber.push_back(num);
+			Me.EndOfStep();
+			if (steps > 1)
+			{
+				cout << "Ваши ходы: " << endl;
+				for (int i = 0;i < steps;i++)
+				{
+					cout << i + 1 << "." << "K-" << Mycows[i] << ",Б-" << Mybulls[i] << "," << "Ваше число-" << Mynumber[i] << endl;
+				}
+			}
+			if (bulls == lenght)
 			{
 				cout << "Поздравляем!!!Вы победили" << endl;
-				cout << "Кол-во ваших шагов-" << steps;
+				cout << "Кол-во ваших шагов-" << steps << endl;
 				Me.SaveRecords(steps);
-				system("pause");
 				play = 1;
 			}
-			else
+			if (bulls<lenght)
 			{
-				SetConsoleCursorPosition(h, coordinats);
 				cout << "Желате продолжить?" << endl;
-				coordinats.X = 22;
-				coordinats.Y = 16;
-				SetConsoleCursorPosition(h, coordinats);
 				cout << "1-Да" << endl;
-				coordinats.X = 22;
-				coordinats.Y = 20;
-				SetConsoleCursorPosition(h, coordinats);
 				cout << "2-Нет" << endl;
 				cin >> choice;
 				system("cls");
@@ -223,7 +234,6 @@ int main()
 				case 1:
 					system("cls");
 					steps++;
-					Me.EndOfStep();
 					goto in;
 				case 2:
 					system("cls");
@@ -236,7 +246,7 @@ int main()
 			cout << "Ошибка ввода!Повторите попытку" << endl;
 			goto in;
 		}
-		system("pause");
 	}
+	system("pause >> NULL");
 	return 0;
 }
