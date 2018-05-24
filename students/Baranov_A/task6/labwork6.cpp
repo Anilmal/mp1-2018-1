@@ -62,7 +62,6 @@ private:
 	int count_of_cows;
 	int count_of_bulls;
 	int Records[11];
-	int **Steps;
 public:
 	Player() : Game() {};
 	Player(Game obj)
